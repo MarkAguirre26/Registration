@@ -33,11 +33,12 @@ public class PersonController {
 
 
         if (saveTag.equals("save")) {
-            url = POST_USER + "new";
+            url = POST_USER + "?new";
         } else {
-            url = POST_USER + "edit";
+            url = POST_USER + "?edit";
         }
 
+        Log.d("savePeson", url + " -> " + saveTag + " " + String.valueOf(R.string.save));
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
@@ -60,6 +61,10 @@ public class PersonController {
                     @Override
                     protected Map<String, String> getParams() throws AuthFailureError {
                         Map<String, String> params = new HashMap<>();
+                        if (saveTag.equals(String.valueOf(R.string.edit))) {
+                            params.put("RegId", person.getRegId());
+                        }
+
                         params.put("Zone", person.getZone());
                         params.put("Placeofbirth", person.getPlaceofBirth());
                         params.put("Birthdate", person.getDateofBirth());
@@ -76,7 +81,7 @@ public class PersonController {
                         params.put("Lastname", person.getLastName());
                         params.put("Firstname", person.getFirstName());
                         params.put("Middlename", person.getMiddleName());
-                        params.put("RegId", person.getRegId());
+
                         params.put("Street", person.getStreet());
                         params.put("Username", person.getUsername());
                         params.put("Password", person.getPassword());
@@ -111,7 +116,6 @@ public class PersonController {
         }
         return true;
     }
-
 
 
     public boolean isAddressInfoNotEmpty() {

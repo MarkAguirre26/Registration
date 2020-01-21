@@ -1,7 +1,9 @@
 package virtual.software.registration;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.text.LoginFilter;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.AnimationUtils;
@@ -40,8 +42,8 @@ public class LoginActivity extends AppCompatActivity {
         txtUsername = findViewById(R.id.txtUsername);
         txtPassword = findViewById(R.id.txtPassword);
 
-        txtUsername.setText("mark");
-        txtPassword.setText("aaaaaaa");
+//        txtUsername.setText("mark");
+//        txtPassword.setText("aaaaaaa");
     }
 
     public void loginClicked(View view) {
@@ -165,8 +167,10 @@ public class LoginActivity extends AppCompatActivity {
 
     public void createAccountClicked(View view) {
 
-        saveTag = "Save";
-        modelPerson =  new ModelPerson();
+        saveTag = getResources().getString(R.string.save);
+
+        Log.d("saveTasg",saveTag);
+        modelPerson = new ModelPerson();
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         startActivity(new Intent(getApplicationContext(), PersonInfoActivity.class));
         finish();

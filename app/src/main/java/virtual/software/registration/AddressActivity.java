@@ -90,7 +90,7 @@ public class AddressActivity extends AppCompatActivity {
         modelPerson.setBarangay(txBarangay.getText().toString());
         modelPerson.setProvince(txtProvince.getText().toString());
         modelPerson.setMunicipality(txtCity.getText().toString());
-        modelPerson.setRegId(Utils.getDeviceIMEI(this));//Change the  temporary number
+//        modelPerson.setRegId(Utils.getDeviceIMEI(this));//Change the  temporary number
         //1. Pass the modelPerson to Controller for validation
         personController = new PersonController(modelPerson, getApplicationContext());
         if (!personController.isAddressInfoNotEmpty()) {

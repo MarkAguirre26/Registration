@@ -143,6 +143,7 @@ public class PersonInfoActivity extends AppCompatActivity {
             modelPerson = new ModelPerson();
         }
 
+
         modelPerson.setUsername(txtUsername_reg.getText().toString());
         modelPerson.setPassword(txtPassword_reg.getText().toString());
         modelPerson.setLastName(txtLastName.getText().toString());
