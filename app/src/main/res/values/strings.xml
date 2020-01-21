@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Registration</string>
+    <string name="btn_save">SAVE</string>
+    <string name="btn_next">NEXT</string>
+    <string name="btn_yes">YES</string>
+    <string name="btn_ok">OK</string>
+    <string name="btn_no">NO</string>
+    <string name="voter">VOTER?</string>
+    <string name="gender">GENDER</string>
+    <string name="birth_date">Birth Date:</string>
+    <string name="senior">SENIOR</string>
+    <string name="edit">edit</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="save">save</string>
+    <string name="error">ERROR OCCURRED</string>
+    <string name="information">INFORMATION</string>
+    <string name="address">ADDRESS</string>
+    <string name="register">REGISTER</string>
+    <string name="success">SUCCESSFULLY  SAVED</string>
+    <string name="confirm_exit">ARE YOU SURE?</string>
+
+
+    <string name="spinner_title">Select</string>
+
+</resources>

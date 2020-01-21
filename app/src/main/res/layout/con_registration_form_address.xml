@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorGrey">
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="30dp">
+
+
+            <TextView
+                android:layout_marginBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/address"
+                android:textColor="@color/colorDarkGrey"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+
+            <EditText
+                android:id="@+id/txtHousehold"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_margin="5dp"
+                android:layout_weight=".75"
+                android:background="@drawable/etxt_round"
+                android:hint="Household No"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:textSize="20sp" />
+
+
+            <EditText
+                android:id="@+id/txtStreet"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_margin="5dp"
+                android:layout_weight=".75"
+                android:background="@drawable/etxt_round"
+                android:hint="Street"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:textSize="20sp" />
+
+
+            <EditText
+                android:id="@+id/txtZone"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_margin="5dp"
+                android:layout_weight=".75"
+                android:background="@drawable/etxt_round"
+                android:hint="Zone/Purok"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/txtBarangay"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_margin="5dp"
+                android:layout_weight=".75"
+                android:background="@drawable/etxt_round"
+                android:hint="Barangay"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:textSize="20sp" />
+
+
+
+            <EditText
+                android:id="@+id/txtProvince"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_margin="5dp"
+                android:layout_weight=".75"
+                android:background="@drawable/etxt_round"
+                android:hint="Province"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:textSize="20sp" />
+
+
+            <EditText
+                android:id="@+id/txtCity"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_margin="5dp"
+                android:layout_weight=".75"
+                android:background="@drawable/etxt_round"
+                android:hint="City/Municipality"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:textSize="20sp" />
+
+
+            <Button
+                android:id="@+id/btn_save"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/btn_round"
+                android:onClick="save_Clicked"
+                android:text="@string/btn_save"
+                android:textColor="@color/colorWhite" />
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+</RelativeLayout>
