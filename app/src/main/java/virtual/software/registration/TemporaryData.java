@@ -9,7 +9,8 @@ public class TemporaryData {
     public static ModelPerson modelPerson;
     public static Bitmap bitmap;
     public  static  boolean isSaved;
-    public  static  boolean isFromLogin;
+
+
 
     public static String encodedImage;
     public static String saveTag;

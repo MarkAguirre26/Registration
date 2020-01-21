@@ -24,8 +24,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.androidnetworking.AndroidNetworking;
-import com.jacksonandroidnetworking.JacksonParserFactory;
+
 import com.squareup.picasso.Picasso;
 
 import java.io.BufferedInputStream;
@@ -101,15 +100,6 @@ public class MainActivity extends AppCompatActivity {
         tvAddress = findViewById(R.id.tvAddress);
 
 
-        // Adding an Network Interceptor for Debugging purpose :
-        OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
-                .build();
-        AndroidNetworking.initialize(getApplicationContext(), okHttpClient);
-
-        // Then set the JacksonParserFactory like below
-        AndroidNetworking.setParserFactory(new JacksonParserFactory());
-
-
 //        Toast.makeText(getApplicationContext(), modelPerson.getRegId(), Toast.LENGTH_SHORT).show();
 
     }
@@ -173,6 +163,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         saveTag = getResources().getString(R.string.edit);
+
         startActivity(new Intent(getApplicationContext(), PersonInfoActivity.class));
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         finish();
@@ -273,6 +264,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getUserData() {
+
+
         txtNameInfo.setText(modelPerson.getFirstName() + " " + modelPerson.getMiddleName() + " " + modelPerson.getLastName());
         txtAgeGenderInfo.setText(modelPerson.getGender() + ", " + modelPerson.getAge() + ", " + modelPerson.getCivilStatus());
         tvBirthdate.setText(modelPerson.getDateofBirth());
@@ -289,7 +282,7 @@ public class MainActivity extends AppCompatActivity {
     private void getUserPhoto() {
         String photo = Endpoint.GET_USER_PHOTO + modelPerson.getFirstName() + modelPerson.getMiddleName() + modelPerson.getLastName() + ".jpg";
         Log.d("photo", photo);
-        Picasso.get().load(photo.replace(" ","")).into(profile_imageview);
+        Picasso.get().load(photo.replace(" ", "")).into(profile_imageview);
 
     }
 

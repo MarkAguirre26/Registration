@@ -1,7 +1,5 @@
 package virtual.software.registration;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,23 +8,30 @@ import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.androidnetworking.AndroidNetworking;
-import com.androidnetworking.common.Priority;
-import com.androidnetworking.error.ANError;
-import com.androidnetworking.interfaces.JSONArrayRequestListener;
+import androidx.appcompat.app.AppCompatActivity;
 
-import org.json.JSONArray;
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.google.android.material.snackbar.Snackbar;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static virtual.software.registration.Endpoint.GET_USER;
 import static virtual.software.registration.TemporaryData.modelPerson;
+import static virtual.software.registration.TemporaryData.saveTag;
 
 public class LoginActivity extends AppCompatActivity {
 
 
     EditText txtUsername, txtPassword;
-    ModelPerson _mPerson;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,51 +47,70 @@ public class LoginActivity extends AppCompatActivity {
     public void loginClicked(View view) {
 
         view.setAnimation(AnimationUtils.loadAnimation(this, R.anim.bounce));
-        getUser(txtUsername.getText().toString(), txtPassword.getText().toString());
+        getUser(view, txtUsername.getText().toString(), txtPassword.getText().toString());
     }
 
 
-    private void getUser(String username, String password) {
-
-//        String imei = Utils.getDeviceIMEI(this);
-//        Log.d("imei", imei);
-        AndroidNetworking.get(GET_USER + "username=" + username + "&password=" + password)
-                .setPriority(Priority.LOW)
-                .build()
-                .getAsJSONArray(new JSONArrayRequestListener() {
+    private void getUser(final View view, final String username, final String password) {
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                StringRequest stringRequest = new StringRequest(Request.Method.POST, GET_USER, new Response.Listener<String>() {
                     @Override
-                    public void onResponse(JSONArray response) {
-                        try {
-                            Log.d("size", response.length() + "");
-                            for (int i = 0; i < response.length(); i++) {
+                    public void onResponse(String response) {
 
 
-                                JSONObject jsonObj = response.getJSONObject(i);
+                        if (response.contains("No Data")) {
+                            Log.e("errRe", response);
+                            Snackbar.make(view, "Invalid", Snackbar.LENGTH_SHORT).setAction("Action", null).show();
+                        } else {
+                            JSONObject jObject = null;
+                            try {
+                                jObject = new JSONObject(response.replace("[", "").replace("]", ""));
 
-                                setModelPersonFromJson(jsonObj);
+                                setModelPersonFromJson(jObject);
 
+
+                            } catch (JSONException e) {
+                                Log.e("resultSaError", response);
+                                e.printStackTrace();
 
                             }
 
-                        } catch (JSONException e) {
-                            Log.e("errorDito", e.getMessage());
-                            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+//                            // userInfo.cn = response;
+                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                            overridePendingTransition(0, 0);
+                            finish();
                         }
 
                     }
-
+                }, new Response.ErrorListener() {
                     @Override
-                    public void onError(ANError error) {
-                        // handle error
-                        Toast.makeText(getApplicationContext(), "Invalid Username or Password", Toast.LENGTH_LONG).show();
+                    public void onErrorResponse(VolleyError error) {
+                        Snackbar.make(view, "Try Again", Snackbar.LENGTH_SHORT).setAction("Action", null).show();
                     }
-                });
+                }) {
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String, String> params = new HashMap<>();
+                        params.put("select", "");
+                        params.put("Username", username);
+                        params.put("Password", password);
+                        return params;
+                    }
+                };
+                MySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
+            }
+        };
+        new Thread(runnable).start();
     }
 
 
     private void setModelPersonFromJson(JSONObject jsonObj) throws JSONException {
 
-        String RecId = jsonObj.getString("REG_NUMBER");
+        String RecId = jsonObj.getString("id");
+        String Username = jsonObj.getString("Username");
+        String Password = jsonObj.getString("Password");
         String Lastname = jsonObj.getString("Lastname");
         String Firstname = jsonObj.getString("Firstname");
         String Middlename = jsonObj.getString("Middlename");
@@ -107,38 +131,42 @@ public class LoginActivity extends AppCompatActivity {
         String Barangay = jsonObj.getString("Barangay");
         String Province = jsonObj.getString("Province");
         String Municipality = jsonObj.getString("Municipality");
-        String photo = jsonObj.getString("Photo");
 
-        _mPerson = new ModelPerson();
-        _mPerson.setRegId(RecId);
-        _mPerson.setLastName(Lastname);
-        _mPerson.setFirstName(Firstname);
-        _mPerson.setMiddleName(Middlename);
-        _mPerson.setCivilStatus(Civilstatus);
-        _mPerson.setDateofBirth(Birthdate);
-        _mPerson.setPlaceofBirth(Placeofbirth);
-        _mPerson.setCitizenship(Citizenship);
-        _mPerson.setOccupation(Cccupation);
-        _mPerson.setGender(Gender);
-        _mPerson.setVoter(Voter);
-        _mPerson.setHousehold(HouseHoldNo);
-        _mPerson.setStreet(Street);
-        _mPerson.setZone(Zone);
-        _mPerson.setBarangay(Barangay);
-        _mPerson.setProvince(Province);
-        _mPerson.setMunicipality(Municipality);
-        _mPerson.setOther(Other);
-        _mPerson.setAge(Age);
-        modelPerson = _mPerson;
 
-        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        modelPerson = new ModelPerson();
+        modelPerson.setRegId(RecId);
+        modelPerson.setUsername(Username);
+        modelPerson.setPassword(Password);
+        modelPerson.setLastName(Lastname);
+        modelPerson.setFirstName(Firstname);
+        modelPerson.setMiddleName(Middlename);
+        modelPerson.setCivilStatus(Civilstatus);
+        modelPerson.setDateofBirth(Birthdate);
+        modelPerson.setPlaceofBirth(Placeofbirth);
+        modelPerson.setCitizenship(Citizenship);
+        modelPerson.setOccupation(Cccupation);
+        modelPerson.setGender(Gender);
+        modelPerson.setVoter(Voter);
+        modelPerson.setHousehold(HouseHoldNo);
+        modelPerson.setStreet(Street);
+        modelPerson.setZone(Zone);
+        modelPerson.setBarangay(Barangay);
+        modelPerson.setProvince(Province);
+        modelPerson.setMunicipality(Municipality);
+        modelPerson.setOther(Other);
+        modelPerson.setAge(Age);
 
-        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+//        Toast.makeText(getApplicationContext(),modelPerson.getLastName(),Toast.LENGTH_LONG).show();
+//        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+//        startActivity(new Intent(getApplicationContext(), MainActivity.class));
 
 
     }
 
     public void createAccountClicked(View view) {
+
+        saveTag = "Save";
+        modelPerson =  new ModelPerson();
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         startActivity(new Intent(getApplicationContext(), PersonInfoActivity.class));
         finish();

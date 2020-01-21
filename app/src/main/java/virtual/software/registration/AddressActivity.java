@@ -46,6 +46,8 @@ public class AddressActivity extends AppCompatActivity {
         txtCity = findViewById(R.id.txtCity);
 
 
+
+
         if (saveTag.equals(getResources().getString(R.string.edit))) {
             txtHousehold.setText(modelPerson.getHousehold());
             txtStreet.setText(modelPerson.getStreet());
@@ -90,7 +92,7 @@ public class AddressActivity extends AppCompatActivity {
         modelPerson.setMunicipality(txtCity.getText().toString());
         modelPerson.setRegId(Utils.getDeviceIMEI(this));//Change the  temporary number
         //1. Pass the modelPerson to Controller for validation
-        personController = new PersonController(modelPerson);
+        personController = new PersonController(modelPerson, getApplicationContext());
         if (!personController.isAddressInfoNotEmpty()) {
             Toast.makeText(getApplicationContext(), "All Fields are required", Toast.LENGTH_SHORT).show();
             return;

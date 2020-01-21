@@ -1,7 +1,5 @@
 package virtual.software.registration;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,17 +10,19 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import static virtual.software.registration.TemporaryData.isFromLogin;
-import static virtual.software.registration.TemporaryData.isSaved;
 import static virtual.software.registration.TemporaryData.modelPerson;
 import static virtual.software.registration.TemporaryData.saveTag;
 
 public class PersonInfoActivity extends AppCompatActivity {
 
-    EditText txtLastName, txtFirstName, txtMiddleName, txtCivilStatus, txtDateofBirth, txtPlaceofBirth, txtCitizenship, txtOccupation;
+    EditText txtLastName, txtFirstName, txtMiddleName, txtCivilStatus, txtDateofBirth,
+            txtPlaceofBirth, txtCitizenship, txtOccupation,
+            txtUsername_reg, txtPassword_reg;
     RadioButton rbMale, rbFeMale, rbVoterYes, rbVoeterNo;
 
     PersonController personController;
@@ -69,6 +69,8 @@ public class PersonInfoActivity extends AppCompatActivity {
         rbVoterYes = findViewById(R.id.rbVoterYes);
         rbVoeterNo = findViewById(R.id.rbVoterNo);
         spinner = findViewById(R.id.spinner);
+        txtUsername_reg = findViewById(R.id.txtUsername_reg);
+        txtPassword_reg = findViewById(R.id.txtPassword_reg);
 
 
         // attaching data adapter to spinner
@@ -76,6 +78,9 @@ public class PersonInfoActivity extends AppCompatActivity {
 
 
         if (saveTag.equals(getResources().getString(R.string.edit))) {
+
+            txtUsername_reg.setText(modelPerson.getUsername());
+            txtPassword_reg.setText(modelPerson.getPassword());
             txtLastName.setText(modelPerson.getLastName());
             txtFirstName.setText(modelPerson.getFirstName());
             txtMiddleName.setText(modelPerson.getMiddleName());
@@ -84,6 +89,7 @@ public class PersonInfoActivity extends AppCompatActivity {
             txtPlaceofBirth.setText(modelPerson.getPlaceofBirth());
             txtCitizenship.setText(modelPerson.getCitizenship());
             txtOccupation.setText(modelPerson.getOccupation());
+
 
             spinner.setSelection(dataAdapter.getPosition(modelPerson.getOther()));
             if (modelPerson.getGender().equals("Female")) {
@@ -101,8 +107,8 @@ public class PersonInfoActivity extends AppCompatActivity {
                 rbVoterYes.setChecked(false);
                 rbVoeterNo.setChecked(true);
             }
-
         }
+
 
     }
 
@@ -133,7 +139,12 @@ public class PersonInfoActivity extends AppCompatActivity {
 
         view.setAnimation(AnimationUtils.loadAnimation(this, R.anim.bounce));
 
+        if(saveTag.equals(getResources().getString(R.string.save))){
+            modelPerson = new ModelPerson();
+        }
 
+        modelPerson.setUsername(txtUsername_reg.getText().toString());
+        modelPerson.setPassword(txtPassword_reg.getText().toString());
         modelPerson.setLastName(txtLastName.getText().toString());
         modelPerson.setFirstName(txtFirstName.getText().toString());
         modelPerson.setMiddleName(txtMiddleName.getText().toString());
@@ -147,13 +158,13 @@ public class PersonInfoActivity extends AppCompatActivity {
         modelPerson.setOther(spinner.getSelectedItem().toString());
 
 
-        personController = new PersonController(modelPerson);
+        personController = new PersonController(modelPerson, getApplicationContext());
         if (!personController.isPersonalInfoNotEmpty()) {
             Toast.makeText(getApplicationContext(), "All Fields are required", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        modelPerson = modelPerson;
+
         //GO to next screen
         startActivity(new Intent(getApplicationContext(), AddressActivity.class));
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
@@ -164,7 +175,7 @@ public class PersonInfoActivity extends AppCompatActivity {
     public void onBackPressed() {
 
 
-        if (isFromLogin) {
+        if (saveTag.equals(String.valueOf(R.string.save))) {
             startActivity(new Intent(getApplicationContext(), LoginActivity.class));
         } else {
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
