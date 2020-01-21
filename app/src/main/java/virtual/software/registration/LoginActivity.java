@@ -138,4 +138,9 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    public void createAccountClicked(View view) {
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        startActivity(new Intent(getApplicationContext(), PersonInfoActivity.class));
+        finish();
+    }
 }

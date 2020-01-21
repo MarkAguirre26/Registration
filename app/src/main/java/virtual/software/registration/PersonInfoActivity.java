@@ -15,6 +15,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import static virtual.software.registration.TemporaryData.isFromLogin;
 import static virtual.software.registration.TemporaryData.isSaved;
 import static virtual.software.registration.TemporaryData.modelPerson;
 import static virtual.software.registration.TemporaryData.saveTag;
@@ -68,7 +69,6 @@ public class PersonInfoActivity extends AppCompatActivity {
         rbVoterYes = findViewById(R.id.rbVoterYes);
         rbVoeterNo = findViewById(R.id.rbVoterNo);
         spinner = findViewById(R.id.spinner);
-
 
 
         // attaching data adapter to spinner
@@ -162,7 +162,13 @@ public class PersonInfoActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+
+
+        if (isFromLogin) {
+            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+        } else {
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        }
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         finish();
     }

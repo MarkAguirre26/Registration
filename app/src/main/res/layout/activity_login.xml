@@ -7,6 +7,7 @@
     tools:context=".LoginActivity">
 
     <RelativeLayout
+
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -17,6 +18,7 @@
             android:src="@drawable/brgy_logo" />
 
         <LinearLayout
+            android:id="@+id/layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
@@ -61,7 +63,21 @@
                 android:onClick="loginClicked"
                 android:text="Login"
                 android:textColor="@color/colorWhite" />
+
+
         </LinearLayout>
+
+        <Button
+            android:onClick="createAccountClicked"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/layout"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:background="#00FFFFFF"
+            android:text="Create Account"
+            android:textColor="#2196F3" />
+
     </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
