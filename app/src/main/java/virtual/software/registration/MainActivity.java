@@ -24,7 +24,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-
 import com.squareup.picasso.Picasso;
 
 import java.io.BufferedInputStream;
@@ -40,8 +39,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-
-import okhttp3.OkHttpClient;
 
 import static virtual.software.registration.TemporaryData.encodedImage;
 import static virtual.software.registration.TemporaryData.jsonObject;
@@ -81,6 +78,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         initComponents();
         checkPermissions();
+
+
+
+
+
 
         getUserData();
     }
@@ -288,6 +290,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void refreshClicked(View view) {
         view.startAnimation(AnimationUtils.loadAnimation(this, R.anim.bounce));
+
+    }
+
+    public void OnClick_DonePickDate(View view) {
+//        findViewById(R.id)
 
     }
 

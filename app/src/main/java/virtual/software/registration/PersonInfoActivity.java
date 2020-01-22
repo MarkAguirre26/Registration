@@ -1,10 +1,12 @@
 package virtual.software.registration;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
@@ -13,6 +15,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import static virtual.software.registration.TemporaryData.modelPerson;
@@ -27,7 +30,7 @@ public class PersonInfoActivity extends AppCompatActivity {
 
     PersonController personController;
     Spinner spinner;
-
+    DatePickerDialog picker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +38,25 @@ public class PersonInfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_personinfo);
         initComponents();
 
+        txtDateofBirth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Calendar cldr = Calendar.getInstance();
+                int day = cldr.get(Calendar.DAY_OF_MONTH);
+                int month = cldr.get(Calendar.MONTH);
+                int year = cldr.get(Calendar.YEAR);
+                // date picker dialog
+                picker = new DatePickerDialog(PersonInfoActivity.this,
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                                txtDateofBirth.setText(dayOfMonth + "/" + (monthOfYear + 1) + "/" + year);
+                            }
+                        }, year, month, day);
+
+                picker.show();
+            }
+        });
     }
 
     private void initComponents() {
@@ -139,7 +161,7 @@ public class PersonInfoActivity extends AppCompatActivity {
 
         view.setAnimation(AnimationUtils.loadAnimation(this, R.anim.bounce));
 
-        if(saveTag.equals(getResources().getString(R.string.save))){
+        if (saveTag.equals(getResources().getString(R.string.save))) {
             modelPerson = new ModelPerson();
         }
 
