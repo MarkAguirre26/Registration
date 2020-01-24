@@ -23,13 +23,13 @@ import static virtual.software.registration.TemporaryData.saveTag;
 
 public class PersonInfoActivity extends AppCompatActivity {
 
-    EditText txtLastName, txtFirstName, txtMiddleName, txtCivilStatus, txtDateofBirth,
+    EditText txtLastName, txtFirstName, txtMiddleName, txtDateofBirth,
             txtPlaceofBirth, txtCitizenship, txtOccupation,
             txtUsername_reg, txtPassword_reg;
     RadioButton rbMale, rbFeMale, rbVoterYes, rbVoeterNo;
 
     PersonController personController;
-    Spinner spinner;
+    Spinner spinner, spinnerMaritalStatus;
     DatePickerDialog picker;
 
     @Override
@@ -70,18 +70,25 @@ public class PersonInfoActivity extends AppCompatActivity {
         categories.add("4P's");
         categories.add("SK");
 
+        List<String> categoriesCivilStatus = new ArrayList<String>();
+        categories.add("Married");
+        categories.add("Single");
+
 
         // Creating adapter for spinner
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
 
+        // Creating adapter for spinner
+        ArrayAdapter<String> dataAdapterCivilStatus = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categoriesCivilStatus);
+
         // Drop down layout style - list view with radio button
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        dataAdapterCivilStatus.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
 
         txtLastName = findViewById(R.id.txtLastName);
         txtFirstName = findViewById(R.id.txtFirstName);
         txtMiddleName = findViewById(R.id.txtMiddleName);
-        txtCivilStatus = findViewById(R.id.txtCivilStatus);
         txtDateofBirth = findViewById(R.id.txtDateofBirth);
         txtPlaceofBirth = findViewById(R.id.txtPlaceofBirth);
         txtCitizenship = findViewById(R.id.txtCitizenship);
@@ -91,12 +98,14 @@ public class PersonInfoActivity extends AppCompatActivity {
         rbVoterYes = findViewById(R.id.rbVoterYes);
         rbVoeterNo = findViewById(R.id.rbVoterNo);
         spinner = findViewById(R.id.spinner);
+        spinnerMaritalStatus = findViewById(R.id.spinnerMaritalStatus);
         txtUsername_reg = findViewById(R.id.txtUsername_reg);
         txtPassword_reg = findViewById(R.id.txtPassword_reg);
 
 
         // attaching data adapter to spinner
         spinner.setAdapter(dataAdapter);
+        spinnerMaritalStatus.setAdapter(dataAdapter);
 
 
         if (saveTag.equals(getResources().getString(R.string.edit))) {
@@ -106,7 +115,6 @@ public class PersonInfoActivity extends AppCompatActivity {
             txtLastName.setText(modelPerson.getLastName());
             txtFirstName.setText(modelPerson.getFirstName());
             txtMiddleName.setText(modelPerson.getMiddleName());
-            txtCivilStatus.setText(modelPerson.getCivilStatus());
             txtDateofBirth.setText(modelPerson.getDateofBirth());
             txtPlaceofBirth.setText(modelPerson.getPlaceofBirth());
             txtCitizenship.setText(modelPerson.getCitizenship());
@@ -114,6 +122,9 @@ public class PersonInfoActivity extends AppCompatActivity {
 
 
             spinner.setSelection(dataAdapter.getPosition(modelPerson.getOther()));
+            spinnerMaritalStatus.setSelection(dataAdapterCivilStatus.getPosition(modelPerson.getCivilStatus()));
+
+
             if (modelPerson.getGender().equals("Female")) {
                 rbFeMale.setChecked(true);
                 rbMale.setChecked(false);
@@ -129,6 +140,9 @@ public class PersonInfoActivity extends AppCompatActivity {
                 rbVoterYes.setChecked(false);
                 rbVoeterNo.setChecked(true);
             }
+
+
+
         }
 
 
@@ -171,7 +185,7 @@ public class PersonInfoActivity extends AppCompatActivity {
         modelPerson.setLastName(txtLastName.getText().toString());
         modelPerson.setFirstName(txtFirstName.getText().toString());
         modelPerson.setMiddleName(txtMiddleName.getText().toString());
-        modelPerson.setCivilStatus(txtCivilStatus.getText().toString());
+        modelPerson.setCivilStatus(spinnerMaritalStatus.getSelectedItem().toString());
         modelPerson.setDateofBirth(txtDateofBirth.getText().toString());
         modelPerson.setPlaceofBirth(txtPlaceofBirth.getText().toString());
         modelPerson.setCitizenship(txtCitizenship.getText().toString());
@@ -179,6 +193,8 @@ public class PersonInfoActivity extends AppCompatActivity {
         modelPerson.setGender(getGender(rbMale, rbFeMale));
         modelPerson.setVoter(getYesNo(rbVoterYes, rbVoeterNo));
         modelPerson.setOther(spinner.getSelectedItem().toString());
+
+
 
 
         personController = new PersonController(modelPerson, getApplicationContext());

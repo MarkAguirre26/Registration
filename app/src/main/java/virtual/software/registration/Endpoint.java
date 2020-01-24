@@ -6,6 +6,6 @@ public class Endpoint {
     public static String POST_USER = baseuRL + "/bio/Controller.php";
     public static String GET_USER = baseuRL + "/bio/Controller.php";
     public static String GET_USER_PHOTO = baseuRL + "/bio/uploads";
-    public static String POST_UPLOAD_IMAGE = baseuRL + "/bio/upload_image.php";
+    public static String POST_UPLOAD_IMAGE = baseuRL + "/bio/upload.php";
 
 }

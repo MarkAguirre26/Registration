@@ -24,7 +24,23 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.MultiplePermissionsReport;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.DexterError;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.PermissionRequestErrorListener;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.squareup.picasso.Picasso;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -38,10 +54,10 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import static virtual.software.registration.TemporaryData.encodedImage;
-import static virtual.software.registration.TemporaryData.jsonObject;
 import static virtual.software.registration.TemporaryData.modelPerson;
 import static virtual.software.registration.TemporaryData.saveTag;
 
@@ -63,6 +79,10 @@ public class MainActivity extends AppCompatActivity {
     int CAPTURE_IMAGE = 102;
 
 
+    JSONObject jsonObject;
+    RequestQueue rQueue;
+
+
     TextView txtNameInfo,
             txtAgeGenderInfo,
             tvBirthdate,
@@ -78,10 +98,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         initComponents();
         checkPermissions();
-
-
-
-
 
 
         getUserData();
@@ -171,13 +187,6 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }
 
-    public void newAccountClicked(View view) {
-        view.startAnimation(AnimationUtils.loadAnimation(this, R.anim.bounce));
-        saveTag = "save";
-        newAccount();
-
-    }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -200,7 +209,9 @@ public class MainActivity extends AppCompatActivity {
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
                 byte[] byteArrayImage = byteArrayOutputStream.toByteArray();
                 encodedImage = Base64.encodeToString(byteArrayImage, Base64.DEFAULT);
-                Log.d("Vicky", "I'm in.");
+
+
+                uploadImage(bitmap);
 
 
             }
@@ -225,7 +236,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void uploadClicked(View view) {
-        new UploadImages().execute();
+
 
     }
 
@@ -293,71 +304,77 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void OnClick_DonePickDate(View view) {
-//        findViewById(R.id)
+
+    private void uploadImage(Bitmap bitmap) {
+
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+        String encodedImage = Base64.encodeToString(byteArrayOutputStream.toByteArray(), Base64.DEFAULT);
+        try {
+            jsonObject = new JSONObject();
+            String imgname = String.valueOf(Calendar.getInstance().getTimeInMillis());
+            jsonObject.put("name", imgname);
+            //  Log.e("Image name", etxtUpload.getText().toString().trim());
+            jsonObject.put("image", encodedImage);
+            // jsonObject.put("aa", "aa");
+        } catch (JSONException e) {
+            Log.e("JSONObject Here", e.toString());
+        }
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, Endpoint.POST_UPLOAD_IMAGE, jsonObject,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject jsonObject) {
+                        Log.e("response", jsonObject.toString());
+                        rQueue.getCache().clear();
+                        Toast.makeText(getApplication(), "Image Uploaded Successfully", Toast.LENGTH_SHORT).show();
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                Log.e("responseError", volleyError.toString());
+
+            }
+        });
+
+        rQueue = Volley.newRequestQueue(MainActivity.this);
+        rQueue.add(jsonObjectRequest);
 
     }
 
-    private class UploadImages extends AsyncTask<Void, Void, Void> {
+        private void requestMultiplePermissions() {
+        Dexter.withActivity(this)
+                .withPermissions(
 
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.READ_EXTERNAL_STORAGE)
+                .withListener(new MultiplePermissionsListener() {
+                    @Override
+                    public void onPermissionsChecked(MultiplePermissionsReport report) {
+                        // check if all permissions are granted
+                        if (report.areAllPermissionsGranted()) {
+                            Toast.makeText(getApplicationContext(), "All permissions are granted by user!", Toast.LENGTH_SHORT).show();
+                        }
 
-        @Override
-        protected void onPreExecute() {
+                        // check for permanent denial of any permission
+                        if (report.isAnyPermissionPermanentlyDenied()) {
+                            // show alert dialog navigating to Settings
 
-        }
+                        }
+                    }
 
-        @Override
-        protected Void doInBackground(Void... params) {
-
-            try {
-                Log.d("Vicky", "encodedImage = " + encodedImage);
-//            jsonObject = new JSONObject();
-                jsonObject.put("imageString", encodedImage);
-                jsonObject.put("imageName", "+917358513024");
-                String data = jsonObject.toString();
-                String yourURL = "http://192.168.254.108/bio/config/img_upload_to_server.php?imageString=" + encodedImage + "&imageName=dito";
-
-                URL url = new URL(yourURL);
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.setDoOutput(true);
-                connection.setDoInput(true);
-                connection.setRequestMethod("POST");
-                connection.setFixedLengthStreamingMode(data.getBytes().length);
-                connection.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
-                OutputStream out = new BufferedOutputStream(connection.getOutputStream());
-                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(out, "UTF-8"));
-                writer.write(data);
-                Log.d("Vicky", "Data to php = " + data);
-                writer.flush();
-                writer.close();
-                out.close();
-                connection.connect();
-
-                InputStream in = new BufferedInputStream(connection.getInputStream());
-                BufferedReader reader = new BufferedReader(new InputStreamReader(
-                        in, "UTF-8"));
-                StringBuilder sb = new StringBuilder();
-                String line = null;
-                while ((line = reader.readLine()) != null) {
-                    sb.append(line);
-                }
-                in.close();
-                String result = sb.toString();
-                Log.d("Vicky", "Response from php = " + result);
-                //Response = new JSONObject(result);
-                connection.disconnect();
-            } catch (Exception e) {
-                Log.d("Vicky", "Error Encountered");
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void args) {
-
-        }
-
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
+                        token.continuePermissionRequest();
+                    }
+                }).
+                withErrorListener(new PermissionRequestErrorListener() {
+                    @Override
+                    public void onError(DexterError error) {
+                        Toast.makeText(getApplicationContext(), "Some Error! ", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .onSameThread()
+                .check();
     }
 
 
