@@ -21,32 +21,29 @@ public class PersonController {
     ModelPerson person;
     Context ctx;
 
+    public PersonController() {
+    }
+
     public PersonController(ModelPerson modelPerson, Context context) {
         person = modelPerson;
         ctx = context;
     }
 
 
-    private String url = "";
-
     public Boolean savePerson() {
 
-
-        if (saveTag.equals("save")) {
-            url = POST_USER + "?new";
-        } else {
-            url = POST_USER + "?edit";
-        }
-
-        Log.d("savePeson", url + " -> " + saveTag + " " + String.valueOf(R.string.save));
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
-                final StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+                final StringRequest stringRequest = new StringRequest(Request.Method.POST, POST_USER, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
 
-                        Log.d("responseFrom", response.toString());
+                        Log.d("responseFromSavePerson", response.toString());
+                        if (saveTag.equals("save")) {
+                            createUserAccount(response.toString());
+                        }
+
                     }
 
 
@@ -54,6 +51,7 @@ public class PersonController {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         isSaved = false;
+                        Log.e("errorHere", error.networkResponse.statusCode + "");
 //                        Snackbar.make(view, "Try Again", Snackbar.LENGTH_SHORT).setAction("Action", null).show();
                         //Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
                     }
@@ -61,10 +59,15 @@ public class PersonController {
                     @Override
                     protected Map<String, String> getParams() throws AuthFailureError {
                         Map<String, String> params = new HashMap<>();
-                        if (saveTag.equals(String.valueOf(R.string.edit))) {
-                            params.put("RegId", person.getRegId());
-                        }
 
+                        if (saveTag.equals("save")) {
+                            params.put("new", "");
+                            params.put("Username", person.getUsername());
+                            params.put("Password", person.getPassword());
+                        } else {
+                            params.put("edit", "");
+                            params.put("REG_NUMBER", person.getRegId());
+                        }
                         params.put("Zone", person.getZone());
                         params.put("Placeofbirth", person.getPlaceofBirth());
                         params.put("Birthdate", person.getDateofBirth());
@@ -81,8 +84,48 @@ public class PersonController {
                         params.put("Lastname", person.getLastName());
                         params.put("Firstname", person.getFirstName());
                         params.put("Middlename", person.getMiddleName());
-
                         params.put("Street", person.getStreet());
+
+                        return params;
+                    }
+                };
+                MySingleton.getInstance(ctx).addToRequestQueue(stringRequest);
+            }
+        };
+        new Thread(runnable).start();
+
+
+        return isSaved;
+    }
+
+
+    public Boolean createUserAccount(final String REG_NUMBER) {
+
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                final StringRequest stringRequest = new StringRequest(Request.Method.POST, POST_USER, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        Log.d("userAccount", response.toString());
+                    }
+
+
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        isSaved = false;
+                        Log.e("errorHere", error.networkResponse.statusCode + "");
+//                        Snackbar.make(view, "Try Again", Snackbar.LENGTH_SHORT).setAction("Action", null).show();
+                        //Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                }) {
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String, String> params = new HashMap<>();
+                        params.put("new_user", "");
+                        params.put("REG_NUMBER", REG_NUMBER);
                         params.put("Username", person.getUsername());
                         params.put("Password", person.getPassword());
                         return params;

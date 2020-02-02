@@ -180,7 +180,7 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        saveTag = getResources().getString(R.string.edit);
+        saveTag = "edit";
 
         startActivity(new Intent(getApplicationContext(), PersonInfoActivity.class));
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
@@ -271,8 +271,10 @@ public class MainActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
         startActivity(new Intent(getApplicationContext(), ImageViewwerActivity.class));
+
         bitmap = ((BitmapDrawable) profile_imageview.getDrawable()).getBitmap();
         TemporaryData.bitmap = bitmap;
+//        finish();
 
     }
 
@@ -313,7 +315,7 @@ public class MainActivity extends AppCompatActivity {
         try {
             jsonObject = new JSONObject();
             String imgname = String.valueOf(Calendar.getInstance().getTimeInMillis());
-            jsonObject.put("name", imgname);
+            jsonObject.put("name", modelPerson.getFirstName() + modelPerson.getMiddleName() + modelPerson.getLastName());
             //  Log.e("Image name", etxtUpload.getText().toString().trim());
             jsonObject.put("image", encodedImage);
             // jsonObject.put("aa", "aa");

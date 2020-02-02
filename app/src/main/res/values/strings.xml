@@ -25,4 +25,14 @@
 
     <string name="spinner_title">Select</string>
 
+
+
+    <string-array name="civil_status">
+        <item>Single</item>
+        <item>Married</item>
+    </string-array>
+
+
+
+
 </resources>

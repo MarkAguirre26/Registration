@@ -103,14 +103,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Civil Status" />
+
             <Spinner
                 android:id="@+id/spinnerMaritalStatus"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
+                android:entries="@array/civil_status"
                 android:prompt="@string/spinner_title" />
-
-
 
 
             <LinearLayout

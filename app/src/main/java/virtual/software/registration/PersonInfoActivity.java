@@ -70,20 +70,20 @@ public class PersonInfoActivity extends AppCompatActivity {
         categories.add("4P's");
         categories.add("SK");
 
-        List<String> categoriesCivilStatus = new ArrayList<String>();
-        categories.add("Married");
-        categories.add("Single");
+//        List<String> categoriesCivilStatus = new ArrayList<String>();
+//        categories.add("Married");
+//        categories.add("Single");
 
 
         // Creating adapter for spinner
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
 
         // Creating adapter for spinner
-        ArrayAdapter<String> dataAdapterCivilStatus = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categoriesCivilStatus);
+//        ArrayAdapter<String> dataAdapterCivilStatus = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categoriesCivilStatus);
 
         // Drop down layout style - list view with radio button
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        dataAdapterCivilStatus.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        dataAdapterCivilStatus.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
 
         txtLastName = findViewById(R.id.txtLastName);
@@ -105,7 +105,7 @@ public class PersonInfoActivity extends AppCompatActivity {
 
         // attaching data adapter to spinner
         spinner.setAdapter(dataAdapter);
-        spinnerMaritalStatus.setAdapter(dataAdapter);
+//        spinnerMaritalStatus.setAdapter(dataAdapterCivilStatus);
 
 
         if (saveTag.equals(getResources().getString(R.string.edit))) {
@@ -120,10 +120,16 @@ public class PersonInfoActivity extends AppCompatActivity {
             txtCitizenship.setText(modelPerson.getCitizenship());
             txtOccupation.setText(modelPerson.getOccupation());
 
-
             spinner.setSelection(dataAdapter.getPosition(modelPerson.getOther()));
-            spinnerMaritalStatus.setSelection(dataAdapterCivilStatus.getPosition(modelPerson.getCivilStatus()));
-
+//            spinnerMaritalStatus.setSelection(dataAdapterCivilStatus.getPosition(modelPerson.getCivilStatus()));
+            String compareValue = modelPerson.getCivilStatus();
+            ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.civil_status, android.R.layout.simple_spinner_item);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinnerMaritalStatus.setAdapter(adapter);
+            if (compareValue != null) {
+                int spinnerPosition = adapter.getPosition(compareValue);
+                spinnerMaritalStatus.setSelection(spinnerPosition);
+            }
 
             if (modelPerson.getGender().equals("Female")) {
                 rbFeMale.setChecked(true);

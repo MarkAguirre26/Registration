@@ -42,14 +42,38 @@ public class LoginActivity extends AppCompatActivity {
         txtUsername = findViewById(R.id.txtUsername);
         txtPassword = findViewById(R.id.txtPassword);
 
-//        txtUsername.setText("mark");
-//        txtPassword.setText("aaaaaaa");
+        txtUsername.setText("mark");
+        txtPassword.setText("Password");
     }
 
     public void loginClicked(View view) {
 
         view.setAnimation(AnimationUtils.loadAnimation(this, R.anim.bounce));
         getUser(view, txtUsername.getText().toString(), txtPassword.getText().toString());
+
+//        saveTag  = "save";
+//        ModelPerson person = new ModelPerson();
+//        person.setZone("134");
+//        person.setPlaceofBirth("Bayomgon");
+//        person.setDateofBirth("04-01-1989");
+//        person.setGender("Male");
+//        person.setCivilStatus("Married");
+//        person.setCitizenship("Filipino");
+//        person.setOccupation("Seller");
+//        person.setVoter("No");
+//        person.setOther("Other");
+//        person.setProvince("Province");
+//        person.setMunicipality("Municipality");
+//        person.setBarangay("brgy");
+//        person.setHousehold("4025");
+//        person.setLastName("Aguirre");
+//        person.setFirstName("Mark");
+//        person.setMiddleName("R");
+//        person.setStreet("Willow");
+//        person.setUsername("mark");
+//        person.setPassword("Password");
+//        new PersonController(person, getApplicationContext()).savePerson();
+
     }
 
 
@@ -60,10 +84,10 @@ public class LoginActivity extends AppCompatActivity {
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, GET_USER, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-
+                        Log.d("responseHere", response);
 
                         if (response.contains("No Data")) {
-                            Log.e("errRe", response);
+
                             Snackbar.make(view, "Invalid", Snackbar.LENGTH_SHORT).setAction("Action", null).show();
                         } else {
                             JSONObject jObject = null;
@@ -110,7 +134,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void setModelPersonFromJson(JSONObject jsonObj) throws JSONException {
 
-        String RecId = jsonObj.getString("id");
+        String RegId = jsonObj.getString("REG_NUMBER");
         String Username = jsonObj.getString("Username");
         String Password = jsonObj.getString("Password");
         String Lastname = jsonObj.getString("Lastname");
@@ -136,7 +160,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
         modelPerson = new ModelPerson();
-        modelPerson.setRegId(RecId);
+        modelPerson.setRegId(RegId);
         modelPerson.setUsername(Username);
         modelPerson.setPassword(Password);
         modelPerson.setLastName(Lastname);
@@ -167,9 +191,9 @@ public class LoginActivity extends AppCompatActivity {
 
     public void createAccountClicked(View view) {
 
-        saveTag = getResources().getString(R.string.save);
+        saveTag = "save";
 
-        Log.d("saveTasg",saveTag);
+        Log.d("saveTasg", saveTag);
         modelPerson = new ModelPerson();
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         startActivity(new Intent(getApplicationContext(), PersonInfoActivity.class));
