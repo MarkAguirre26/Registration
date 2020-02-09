@@ -1,14 +1,11 @@
 package virtual.software.registration;
 
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
-import android.text.LoginFilter;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -25,9 +22,10 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-import static virtual.software.registration.Endpoint.GET_USER;
+import static virtual.software.registration.Endpoint.LOGIN;
 import static virtual.software.registration.TemporaryData.modelPerson;
 import static virtual.software.registration.TemporaryData.saveTag;
+import static virtual.software.registration.LoginInfo.*;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -42,46 +40,22 @@ public class LoginActivity extends AppCompatActivity {
         txtUsername = findViewById(R.id.txtUsername);
         txtPassword = findViewById(R.id.txtPassword);
 
-        txtUsername.setText("mark");
-        txtPassword.setText("Password");
+        txtUsername.setText("Admin");
+        txtPassword.setText("Admin");
     }
 
     public void loginClicked(View view) {
 
         view.setAnimation(AnimationUtils.loadAnimation(this, R.anim.bounce));
-        getUser(view, txtUsername.getText().toString(), txtPassword.getText().toString());
-
-//        saveTag  = "save";
-//        ModelPerson person = new ModelPerson();
-//        person.setZone("134");
-//        person.setPlaceofBirth("Bayomgon");
-//        person.setDateofBirth("04-01-1989");
-//        person.setGender("Male");
-//        person.setCivilStatus("Married");
-//        person.setCitizenship("Filipino");
-//        person.setOccupation("Seller");
-//        person.setVoter("No");
-//        person.setOther("Other");
-//        person.setProvince("Province");
-//        person.setMunicipality("Municipality");
-//        person.setBarangay("brgy");
-//        person.setHousehold("4025");
-//        person.setLastName("Aguirre");
-//        person.setFirstName("Mark");
-//        person.setMiddleName("R");
-//        person.setStreet("Willow");
-//        person.setUsername("mark");
-//        person.setPassword("Password");
-//        new PersonController(person, getApplicationContext()).savePerson();
-
+        login(view, txtUsername.getText().toString(), txtPassword.getText().toString());
     }
 
 
-    private void getUser(final View view, final String username, final String password) {
+    private void login(final View view, final String username, final String password) {
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
-                StringRequest stringRequest = new StringRequest(Request.Method.POST, GET_USER, new Response.Listener<String>() {
+                StringRequest stringRequest = new StringRequest(Request.Method.POST, LOGIN, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         Log.d("responseHere", response);
@@ -94,8 +68,8 @@ public class LoginActivity extends AppCompatActivity {
                             try {
                                 jObject = new JSONObject(response.replace("[", "").replace("]", ""));
 
-                                setModelPersonFromJson(jObject);
-
+//                                setModelPersonFromJson(jObject);
+                                setLoginInfo(jObject);
 
                             } catch (JSONException e) {
                                 Log.e("resultSaError", response);
@@ -104,7 +78,7 @@ public class LoginActivity extends AppCompatActivity {
                             }
 
 //                            // userInfo.cn = response;
-                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                            startActivity(new Intent(getApplicationContext(), MainListActivity.class));
                             overridePendingTransition(0, 0);
                             finish();
                         }
@@ -119,7 +93,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     protected Map<String, String> getParams() throws AuthFailureError {
                         Map<String, String> params = new HashMap<>();
-                        params.put("select", "");
+                        params.put("login", "");
                         params.put("Username", username);
                         params.put("Password", password);
                         return params;
@@ -131,63 +105,12 @@ public class LoginActivity extends AppCompatActivity {
         new Thread(runnable).start();
     }
 
-
-    private void setModelPersonFromJson(JSONObject jsonObj) throws JSONException {
-
-        String RegId = jsonObj.getString("REG_NUMBER");
-        String Username = jsonObj.getString("Username");
-        String Password = jsonObj.getString("Password");
-        String Lastname = jsonObj.getString("Lastname");
-        String Firstname = jsonObj.getString("Firstname");
-        String Middlename = jsonObj.getString("Middlename");
-        String Age = jsonObj.getString("Age");
-
-        String Placeofbirth = jsonObj.getString("Placeofbirth");
-        String Birthdate = jsonObj.getString("Birthdate");
-        String Gender = jsonObj.getString("Gender");
-        String Civilstatus = jsonObj.getString("Civilstatus");
-        String Citizenship = jsonObj.getString("Citizenship");
-        String Cccupation = jsonObj.getString("Cccupation");
-        String Voter = jsonObj.getString("Voter");
-        String Other = jsonObj.getString("Other");
-
-        String HouseHoldNo = jsonObj.getString("HouseHoldNo");
-        String Street = jsonObj.getString("Street");
-        String Zone = jsonObj.getString("Zone");
-        String Barangay = jsonObj.getString("Barangay");
-        String Province = jsonObj.getString("Province");
-        String Municipality = jsonObj.getString("Municipality");
-
-
-        modelPerson = new ModelPerson();
-        modelPerson.setRegId(RegId);
-        modelPerson.setUsername(Username);
-        modelPerson.setPassword(Password);
-        modelPerson.setLastName(Lastname);
-        modelPerson.setFirstName(Firstname);
-        modelPerson.setMiddleName(Middlename);
-        modelPerson.setCivilStatus(Civilstatus);
-        modelPerson.setDateofBirth(Birthdate);
-        modelPerson.setPlaceofBirth(Placeofbirth);
-        modelPerson.setCitizenship(Citizenship);
-        modelPerson.setOccupation(Cccupation);
-        modelPerson.setGender(Gender);
-        modelPerson.setVoter(Voter);
-        modelPerson.setHousehold(HouseHoldNo);
-        modelPerson.setStreet(Street);
-        modelPerson.setZone(Zone);
-        modelPerson.setBarangay(Barangay);
-        modelPerson.setProvince(Province);
-        modelPerson.setMunicipality(Municipality);
-        modelPerson.setOther(Other);
-        modelPerson.setAge(Age);
-
-//        Toast.makeText(getApplicationContext(),modelPerson.getLastName(),Toast.LENGTH_LONG).show();
-//        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-//        startActivity(new Intent(getApplicationContext(), MainActivity.class));
-
-
+    private void setLoginInfo(JSONObject jObject) throws JSONException {
+        RecID = jObject.getString("RecId");
+        Username = jObject.getString("userid");
+        Password = jObject.getString("password");
     }
+
 
     public void createAccountClicked(View view) {
 
@@ -196,7 +119,7 @@ public class LoginActivity extends AppCompatActivity {
         Log.d("saveTasg", saveTag);
         modelPerson = new ModelPerson();
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-        startActivity(new Intent(getApplicationContext(), PersonInfoActivity.class));
+        startActivity(new Intent(getApplicationContext(), CreateAccountActivity.class));
         finish();
     }
 }

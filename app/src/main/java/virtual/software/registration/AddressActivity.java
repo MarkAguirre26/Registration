@@ -73,7 +73,7 @@ public class AddressActivity extends AppCompatActivity {
 
 
     private void close() {
-        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        startActivity(new Intent(getApplicationContext(), MainListActivity.class));
         overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         finishAffinity();
     }
@@ -99,11 +99,11 @@ public class AddressActivity extends AppCompatActivity {
         }
 
         personController.savePerson();
-//        if (!isSaved) {
-//            Toast.makeText(getApplicationContext(), "Failed to save.", Toast.LENGTH_SHORT).show();
-//            return;
-//        }
-        showDialog();
+
+
+
+//        showDialog();
+
 
 
     }

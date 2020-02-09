@@ -26,13 +26,11 @@
     <string name="spinner_title">Select</string>
 
 
-
     <string-array name="civil_status">
         <item>Single</item>
         <item>Married</item>
     </string-array>
-
-
+    <string name="title_activity_main_list">Main List Activity</string>
 
 
 </resources>

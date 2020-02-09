@@ -40,9 +40,9 @@ public class PersonController {
                     public void onResponse(String response) {
 
                         Log.d("responseFromSavePerson", response.toString());
-                        if (saveTag.equals("save")) {
-                            createUserAccount(response.toString());
-                        }
+//                        if (saveTag.equals("save")) {
+//                            createUserAccount(response.toString());
+//                        }
 
                     }
 
@@ -62,8 +62,8 @@ public class PersonController {
 
                         if (saveTag.equals("save")) {
                             params.put("new", "");
-                            params.put("Username", person.getUsername());
-                            params.put("Password", person.getPassword());
+//                            params.put("Username", person.getUsername());
+//                            params.put("Password", person.getPassword());
                         } else {
                             params.put("edit", "");
                             params.put("REG_NUMBER", person.getRegId());
@@ -99,48 +99,6 @@ public class PersonController {
     }
 
 
-    public Boolean createUserAccount(final String REG_NUMBER) {
-
-        Runnable runnable = new Runnable() {
-            @Override
-            public void run() {
-                final StringRequest stringRequest = new StringRequest(Request.Method.POST, POST_USER, new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-
-                        Log.d("userAccount", response.toString());
-                    }
-
-
-                }, new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        isSaved = false;
-                        Log.e("errorHere", error.networkResponse.statusCode + "");
-//                        Snackbar.make(view, "Try Again", Snackbar.LENGTH_SHORT).setAction("Action", null).show();
-                        //Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
-                    }
-                }) {
-                    @Override
-                    protected Map<String, String> getParams() throws AuthFailureError {
-                        Map<String, String> params = new HashMap<>();
-                        params.put("new_user", "");
-                        params.put("REG_NUMBER", REG_NUMBER);
-                        params.put("Username", person.getUsername());
-                        params.put("Password", person.getPassword());
-                        return params;
-                    }
-                };
-                MySingleton.getInstance(ctx).addToRequestQueue(stringRequest);
-            }
-        };
-        new Thread(runnable).start();
-
-
-        return isSaved;
-    }
-
-
     public boolean isPersonalInfoNotEmpty() {
         if (person.getLastName().equals("")
                 || person.getFirstName().equals("")
@@ -151,8 +109,6 @@ public class PersonController {
                 || person.getCitizenship().equals("")
                 || person.getOccupation().equals("")
                 || person.getVoter().equals("")
-                || person.getUsername().equals("")
-                || person.getPassword().equals("")
                 || person.getOther().equals("")
                 || person.getGender().equals("")) {
             return false;

@@ -16,40 +16,6 @@
             android:orientation="vertical"
             android:padding="30dp">
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:text="CREDENTIALS"
-                android:textColor="@color/colorDarkGrey"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/txtUsername_reg"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_margin="5dp"
-                android:layout_weight=".75"
-                android:background="@drawable/etxt_round"
-                android:hint="Username"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:textSize="20sp" />
-
-            <EditText
-                android:id="@+id/txtPassword_reg"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_margin="5dp"
-                android:layout_weight=".75"
-                android:background="@drawable/etxt_round"
-                android:hint="Password"
-                android:inputType="textPassword"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:textSize="20sp" />
-
 
             <TextView
                 android:layout_width="match_parent"

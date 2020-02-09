@@ -24,8 +24,7 @@ import static virtual.software.registration.TemporaryData.saveTag;
 public class PersonInfoActivity extends AppCompatActivity {
 
     EditText txtLastName, txtFirstName, txtMiddleName, txtDateofBirth,
-            txtPlaceofBirth, txtCitizenship, txtOccupation,
-            txtUsername_reg, txtPassword_reg;
+            txtPlaceofBirth, txtCitizenship, txtOccupation;
     RadioButton rbMale, rbFeMale, rbVoterYes, rbVoeterNo;
 
     PersonController personController;
@@ -99,8 +98,6 @@ public class PersonInfoActivity extends AppCompatActivity {
         rbVoeterNo = findViewById(R.id.rbVoterNo);
         spinner = findViewById(R.id.spinner);
         spinnerMaritalStatus = findViewById(R.id.spinnerMaritalStatus);
-        txtUsername_reg = findViewById(R.id.txtUsername_reg);
-        txtPassword_reg = findViewById(R.id.txtPassword_reg);
 
 
         // attaching data adapter to spinner
@@ -110,8 +107,7 @@ public class PersonInfoActivity extends AppCompatActivity {
 
         if (saveTag.equals(getResources().getString(R.string.edit))) {
 
-            txtUsername_reg.setText(modelPerson.getUsername());
-            txtPassword_reg.setText(modelPerson.getPassword());
+
             txtLastName.setText(modelPerson.getLastName());
             txtFirstName.setText(modelPerson.getFirstName());
             txtMiddleName.setText(modelPerson.getMiddleName());
@@ -146,7 +142,6 @@ public class PersonInfoActivity extends AppCompatActivity {
                 rbVoterYes.setChecked(false);
                 rbVoeterNo.setChecked(true);
             }
-
 
 
         }
@@ -186,8 +181,6 @@ public class PersonInfoActivity extends AppCompatActivity {
         }
 
 
-        modelPerson.setUsername(txtUsername_reg.getText().toString());
-        modelPerson.setPassword(txtPassword_reg.getText().toString());
         modelPerson.setLastName(txtLastName.getText().toString());
         modelPerson.setFirstName(txtFirstName.getText().toString());
         modelPerson.setMiddleName(txtMiddleName.getText().toString());
@@ -199,8 +192,6 @@ public class PersonInfoActivity extends AppCompatActivity {
         modelPerson.setGender(getGender(rbMale, rbFeMale));
         modelPerson.setVoter(getYesNo(rbVoterYes, rbVoeterNo));
         modelPerson.setOther(spinner.getSelectedItem().toString());
-
-
 
 
         personController = new PersonController(modelPerson, getApplicationContext());
@@ -223,7 +214,7 @@ public class PersonInfoActivity extends AppCompatActivity {
         if (saveTag.equals(String.valueOf(R.string.save))) {
             startActivity(new Intent(getApplicationContext(), LoginActivity.class));
         } else {
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+            startActivity(new Intent(getApplicationContext(), MainListActivity.class));
         }
         overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
         finish();

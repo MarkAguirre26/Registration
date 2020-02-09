@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CreateAccountActivity">
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_marginTop="50dp"
+            android:src="@drawable/brgy_logo" />
+
+        <LinearLayout
+            android:id="@+id/layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Username:" />
+
+            <EditText
+                android:id="@+id/txtUsernameCreate"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/etxt_round"
+                android:hint="Username"
+                android:padding="5dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Password:" />
+
+            <EditText
+                android:id="@+id/txtPasswordCreate"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/etxt_round"
+
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:padding="5dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:text="Confirm Password:" />
+
+            <EditText
+                android:id="@+id/txtRePasswordCreate"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/etxt_round"
+
+                android:hint="Confirm Password"
+                android:inputType="textPassword"
+                android:padding="5dp" />
+
+
+
+
+            <Button
+                android:id="@+id/btnLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/btn_round"
+                android:onClick="createAccountClicked"
+                android:text="Create"
+                android:textColor="@color/colorWhite" />
+
+
+        </LinearLayout>
+
+        <Button
+            android:onClick="loginClicked"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/layout"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:background="#00FFFFFF"
+            android:text="Login"
+            android:textColor="#2196F3" />
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

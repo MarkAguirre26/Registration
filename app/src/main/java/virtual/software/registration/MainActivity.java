@@ -64,19 +64,11 @@ import static virtual.software.registration.TemporaryData.saveTag;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final int SELECTED_PIC = 1;
+
     ImageView profile_imageview;
     Bitmap bitmap;
-    String image_name = "imageNameHere";
+
     private static final int REQUEST_CAPTURE_IMAGE = 100;
-
-
-    private ProgressDialog progressDialog;
-    private String ImageName = "image_name";
-    private String ImagePath = "image_path";
-    private boolean check = true;
-    int SELECT_PICTURE = 101;
-    int CAPTURE_IMAGE = 102;
 
 
     JSONObject jsonObject;
