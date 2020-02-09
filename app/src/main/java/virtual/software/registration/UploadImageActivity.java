@@ -12,6 +12,8 @@ import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -45,6 +47,7 @@ public class UploadImageActivity extends AppCompatActivity {
 
     JSONObject jsonObject;
     RequestQueue rQueue;
+    PersonController personController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +56,8 @@ public class UploadImageActivity extends AppCompatActivity {
     }
 
     public void uploadClicked(View view) {
+        openCameraIntent();
     }
-
 
 
     @Override
@@ -79,9 +82,15 @@ public class UploadImageActivity extends AppCompatActivity {
                 byte[] byteArrayImage = byteArrayOutputStream.toByteArray();
                 encodedImage = Base64.encodeToString(byteArrayImage, Base64.DEFAULT);
 
+                personController = new PersonController(modelPerson, getApplicationContext());
+                if (!personController.isAddressInfoNotEmpty()) {
+                    Toast.makeText(getApplicationContext(), "All Fields are required", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
+                personController.savePerson();
                 uploadImage(bitmap);
-
+                closeandGotoMainList();
 
             }
 //                Uri selectedImageUri = data.getData();
@@ -90,10 +99,7 @@ public class UploadImageActivity extends AppCompatActivity {
         }
 
 
-
     }
-
-
 
 
     private void openCameraIntent() {
@@ -115,7 +121,7 @@ public class UploadImageActivity extends AppCompatActivity {
         try {
             jsonObject = new JSONObject();
             String imgname = String.valueOf(Calendar.getInstance().getTimeInMillis());
-            jsonObject.put("name", modelPerson.getFirstName() + modelPerson.getMiddleName() + modelPerson.getLastName());
+            jsonObject.put("name", modelPerson.getLastName() + modelPerson.getFirstName() + modelPerson.getMiddleName());
             //  Log.e("Image name", etxtUpload.getText().toString().trim());
             jsonObject.put("image", encodedImage);
             // jsonObject.put("aa", "aa");
@@ -128,10 +134,8 @@ public class UploadImageActivity extends AppCompatActivity {
                     public void onResponse(JSONObject jsonObject) {
                         Log.e("response", jsonObject.toString());
                         rQueue.getCache().clear();
-                        Toast.makeText(getApplication(), "Image Uploaded Successfully", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(getApplicationContext(), MainListActivity.class));
-                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                        finishAffinity();
+//                        Toast.makeText(getApplication(), "Image Uploaded Successfully", Toast.LENGTH_SHORT).show();
+
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -147,6 +151,40 @@ public class UploadImageActivity extends AppCompatActivity {
     }
 
 
+    private void closeandGotoMainList() {
+        startActivity(new Intent(getApplicationContext(), MainListActivity.class));
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        finishAffinity();
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(getApplicationContext(), AddressActivity.class));
+        overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
+        finish();
+    }
+
+    public void showDialog() {
+        final android.app.Dialog dialog = new android.app.Dialog(UploadImageActivity.this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(false);
+        dialog.setContentView(R.layout.diloag_congratulation_layout);
+
+//        TextView text = (TextView) dialog.findViewById(R.id.text_dialog);
+//        text.setText(msg);
+
+        Button dialogButton = (Button) dialog.findViewById(R.id.btn_dialog);
+        dialogButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                closeandGotoMainList();
+            }
+        });
+
+        dialog.show();
+
+    }
 
 
 }

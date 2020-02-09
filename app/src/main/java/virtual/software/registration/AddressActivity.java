@@ -26,7 +26,7 @@ public class AddressActivity extends AppCompatActivity {
 
     EditText txtHousehold, txtStreet, txtZone, txBarangay, txtProvince, txtCity;
 
-    PersonController personController;
+
 
     @Override
 
@@ -72,11 +72,7 @@ public class AddressActivity extends AppCompatActivity {
     }
 
 
-    private void close() {
-        startActivity(new Intent(getApplicationContext(), MainListActivity.class));
-        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-        finishAffinity();
-    }
+
 
     public void save_Clicked(View view) {
 
@@ -92,17 +88,14 @@ public class AddressActivity extends AppCompatActivity {
         modelPerson.setMunicipality(txtCity.getText().toString());
 //        modelPerson.setRegId(Utils.getDeviceIMEI(this));//Change the  temporary number
         //1. Pass the modelPerson to Controller for validation
-        personController = new PersonController(modelPerson, getApplicationContext());
-        if (!personController.isAddressInfoNotEmpty()) {
-            Toast.makeText(getApplicationContext(), "All Fields are required", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        personController.savePerson();
 
 
 
-//        showDialog();
+
+//        go to upload image
+        startActivity(new Intent(getApplicationContext(), UploadImageActivity.class));
+        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+        finish();
 
 
 
@@ -132,27 +125,6 @@ public class AddressActivity extends AppCompatActivity {
     }
 
 
-    public void showDialog() {
-        final android.app.Dialog dialog = new android.app.Dialog(AddressActivity.this);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setCancelable(false);
-        dialog.setContentView(R.layout.diloag_congratulation_layout);
-
-//        TextView text = (TextView) dialog.findViewById(R.id.text_dialog);
-//        text.setText(msg);
-
-        Button dialogButton = (Button) dialog.findViewById(R.id.btn_dialog);
-        dialogButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dialog.dismiss();
-                close();
-            }
-        });
-
-        dialog.show();
-
-    }
 
 
 }

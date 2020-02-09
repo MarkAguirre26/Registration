@@ -113,7 +113,7 @@
                 android:layout_marginTop="20dp"
                 android:background="@drawable/btn_round"
                 android:onClick="save_Clicked"
-                android:text="@string/btn_save"
+                android:text="@string/btn_next"
                 android:textColor="@color/colorWhite" />
 
         </LinearLayout>
