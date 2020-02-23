@@ -175,7 +175,8 @@ public class PersonInfoActivity extends AppCompatActivity {
 
         view.setAnimation(AnimationUtils.loadAnimation(this, R.anim.bounce));
 
-        if (saveTag.equals(getResources().getString(R.string.save))) {
+        if (saveTag.equals("save")) {
+//            modelPerson = null;
             modelPerson = new ModelPerson();
         }
 
@@ -189,6 +190,7 @@ public class PersonInfoActivity extends AppCompatActivity {
         modelPerson.setCitizenship(txtCitizenship.getText().toString());
         modelPerson.setOccupation(txtOccupation.getText().toString());
         modelPerson.setGender(getGender(rbMale, rbFeMale));
+//        modelPerson.setProvince("-");
         modelPerson.setVoter(getYesNo(rbVoterYes, rbVoeterNo));
         modelPerson.setOther(spinner.getSelectedItem().toString());
 

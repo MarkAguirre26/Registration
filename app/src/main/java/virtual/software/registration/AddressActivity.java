@@ -43,13 +43,13 @@ public class AddressActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String[] items = {"Purok Sampaguita", "Purok Gumamela", "Purok Jasmin", "Purok Camia", "Purok Rosal", "Purok Sunflower", "Purok Dahlia"
+                final String[] items = {"Purok Sampaguita", "Purok Gumamela", "Purok Jasmin", "Purok Camia", "Purok Rosal", "Purok Sunflower", "Purok Dahlia"
                 };
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+                AlertDialog.Builder builder = new AlertDialog.Builder(AddressActivity.this);
 
                 //set the title for alert dialog
-                builder.setTitle("Choose names: ");
+                builder.setTitle("Choose Purok: ");
 
                 //set items to alert dialog. i.e. our array , which will be shown as list view in alert dialog
                 builder.setItems(items, new DialogInterface.OnClickListener() {
@@ -57,7 +57,7 @@ public class AddressActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int item) {
                         //setting the button text to the selected itenm from the list
-//                button.setText(items[item]);
+                        txtZone.setText(items[item]);
                     }
                 });
 
@@ -160,9 +160,6 @@ public class AddressActivity extends AppCompatActivity {
         dialog.show();
 
     }
-
-
-
 
 
 }

@@ -19,7 +19,7 @@ public class ModelPerson {
     private String Zone;
     private String Barangay;
     private String Age;
-    private String Province;
+//    private String Province;
     private String Voter;
     private String Other;
 
@@ -170,13 +170,13 @@ public class ModelPerson {
     }
 
 
-    public String getProvince() {
-        return Province;
-    }
-
-    public void setProvince(String province) {
-        Province = province;
-    }
+//    public String getProvince() {
+//        return Province;
+//    }
+//
+//    public void setProvince(String province) {
+//        Province = province;
+//    }
 
 
 }

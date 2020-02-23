@@ -88,9 +88,10 @@ public class UploadImageActivity extends AppCompatActivity {
                     return;
                 }
 
-                personController.savePerson();
+                personController.savePerson().contains("true");
                 uploadImage(bitmap);
                 closeandGotoMainList();
+
 
             }
 //                Uri selectedImageUri = data.getData();

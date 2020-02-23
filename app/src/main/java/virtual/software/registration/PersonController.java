@@ -29,8 +29,9 @@ public class PersonController {
         ctx = context;
     }
 
+    private String responseFromSave = "";
 
-    public Boolean savePerson() {
+    public String savePerson() {
 
         Runnable runnable = new Runnable() {
             @Override
@@ -39,10 +40,8 @@ public class PersonController {
                     @Override
                     public void onResponse(String response) {
 
-                        Log.d("responseFromSavePerson", response.toString());
-//                        if (saveTag.equals("save")) {
-//                            createUserAccount(response.toString());
-//                        }
+                        Log.d("responseFromSavePerson", response);
+                        responseFromSave = "response";
 
                     }
 
@@ -77,7 +76,6 @@ public class PersonController {
                         params.put("Occupation", person.getOccupation());
                         params.put("Voter", person.getVoter());
                         params.put("Other", person.getOther());
-                        params.put("Province", person.getProvince());
                         params.put("Municipality", person.getMunicipality());
                         params.put("Barangay", person.getBarangay());
                         params.put("HouseHoldNo", person.getHousehold());
@@ -85,7 +83,6 @@ public class PersonController {
                         params.put("Firstname", person.getFirstName());
                         params.put("Middlename", person.getMiddleName());
                         params.put("Street", person.getStreet());
-
                         return params;
                     }
                 };
@@ -95,7 +92,7 @@ public class PersonController {
         new Thread(runnable).start();
 
 
-        return isSaved;
+        return responseFromSave;
     }
 
 
