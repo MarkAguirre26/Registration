@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -23,6 +24,7 @@ import static virtual.software.registration.TemporaryData.isSaved;
 
 public class CreateAccountActivity extends AppCompatActivity {
     EditText txtUsername, txtPassword, txtRePassword;
+    RadioButton rbsecretary, rbChairPerson;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,8 @@ public class CreateAccountActivity extends AppCompatActivity {
     }
 
     private void initComponents() {
+        rbsecretary = findViewById(R.id.rbsecretary);
+        rbChairPerson = findViewById(R.id.rbchairperson);
         txtUsername = findViewById(R.id.txtUsernameCreate);
         txtPassword = findViewById(R.id.txtPasswordCreate);
         txtRePassword = findViewById(R.id.txtRePasswordCreate);
@@ -45,6 +49,7 @@ public class CreateAccountActivity extends AppCompatActivity {
     }
 
     public Boolean createUserAccount() {
+
 
         Runnable runnable = new Runnable() {
             @Override
@@ -66,16 +71,22 @@ public class CreateAccountActivity extends AppCompatActivity {
                         isSaved = false;
                         Log.e("errorHere", error.networkResponse.statusCode + "");
 //                        Snackbar.make(view, "Try Again", Snackbar.LENGTH_SHORT).setAction("Action", null).show();
-                        //Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), error.networkResponse.statusCode, Toast.LENGTH_LONG).show();
                     }
                 }) {
                     @Override
                     protected Map<String, String> getParams() throws AuthFailureError {
+                        String position = "";
+                        if (rbChairPerson.isChecked()) {
+                            position = "ChairPerson";
+                        } else {
+                            position = "Secretary";
+                        }
                         Map<String, String> params = new HashMap<>();
                         params.put("new_user", "");
                         params.put("Username", txtUsername.getText().toString());
                         params.put("Password", txtPassword.getText().toString());
-                        params.put("Position", "-");
+                        params.put("Position", position);
                         params.put("Usertype", "Official");
                         return params;
                     }

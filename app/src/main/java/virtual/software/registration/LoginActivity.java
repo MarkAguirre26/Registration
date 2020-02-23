@@ -40,8 +40,8 @@ public class LoginActivity extends AppCompatActivity {
         txtUsername = findViewById(R.id.txtUsername);
         txtPassword = findViewById(R.id.txtPassword);
 
-        txtUsername.setText("Admin");
-        txtPassword.setText("Admin");
+//        txtUsername.setText("Admin");
+//        txtPassword.setText("Admin");
     }
 
     public void loginClicked(View view) {

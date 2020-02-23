@@ -64,7 +64,6 @@ public class PersonInfoActivity extends AppCompatActivity {
 
         // Spinner Drop down elements
         List<String> categories = new ArrayList<String>();
-        categories.add("PWD");
         categories.add("Senior");
         categories.add("4P's");
         categories.add("SK");

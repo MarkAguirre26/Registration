@@ -122,7 +122,7 @@ public class PersonController {
                 || person.getStreet().equals("")
                 || person.getZone().equals("")
                 || person.getBarangay().equals("")
-                || person.getProvince().equals("")
+//                || person.getProvince().equals("")
                 || person.getMunicipality().equals("")) {
             return false;
         }

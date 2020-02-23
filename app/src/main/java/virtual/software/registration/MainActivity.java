@@ -96,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initComponents() {
+
         this.setTitle("Personal Information");
 
         profile_imageview = findViewById(R.id.profile_imageview);
@@ -289,7 +290,11 @@ public class MainActivity extends AppCompatActivity {
     private void getUserPhoto() {
         String photo = Endpoint.GET_USER_PHOTO + modelPerson.getFirstName() + modelPerson.getMiddleName() + modelPerson.getLastName() + ".jpg";
         Log.d("photo", photo);
-        Picasso.get().load(photo.replace(" ", "")).into(profile_imageview);
+        Picasso.get()
+                .load(photo.replace(" ", ""))
+                .placeholder(R.drawable.man_profile)
+                .error(R.drawable.man_profile)
+                .into(profile_imageview);
 
     }
 
@@ -335,7 +340,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-        private void requestMultiplePermissions() {
+    private void requestMultiplePermissions() {
         Dexter.withActivity(this)
                 .withPermissions(
 

@@ -79,17 +79,17 @@
 
 
 
-            <EditText
-                android:id="@+id/txtProvince"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_margin="5dp"
-                android:layout_weight=".75"
-                android:background="@drawable/etxt_round"
-                android:hint="Province"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:textSize="20sp" />
+<!--            <EditText-->
+<!--                android:id="@+id/txtProvince"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="45dp"-->
+<!--                android:layout_margin="5dp"-->
+<!--                android:layout_weight=".75"-->
+<!--                android:background="@drawable/etxt_round"-->
+<!--                android:hint="Province"-->
+<!--                android:paddingLeft="5dp"-->
+<!--                android:paddingRight="5dp"-->
+<!--                android:textSize="20sp" />-->
 
 
             <EditText
