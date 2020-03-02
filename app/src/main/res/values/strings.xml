@@ -26,9 +26,14 @@
     <string name="spinner_title">Select</string>
 
 
+
+
     <string-array name="civil_status">
+        <item>Select</item>
         <item>Single</item>
         <item>Married</item>
+        <item>Widowed</item>
+        <item>Separated</item>
     </string-array>
     <string name="title_activity_main_list">Main List Activity</string>
 

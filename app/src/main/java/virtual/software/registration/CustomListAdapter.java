@@ -56,16 +56,16 @@ public class CustomListAdapter extends BaseAdapter {
         NetworkImageView thumbNail = (NetworkImageView) convertView
                 .findViewById(R.id.thumbnail);
         TextView name = (TextView) convertView.findViewById(R.id.nameList);
-        TextView barngay = (TextView) convertView.findViewById(R.id.barangayList);
-        TextView city = (TextView) convertView.findViewById(R.id.cityList);
+//        TextView barngay = (TextView) convertView.findViewById(R.id.barangayList);
+//        TextView city = (TextView) convertView.findViewById(R.id.cityList);
         TextView recId = (TextView) convertView.findViewById(R.id.recIdList);
 
         DataModel m = movieItems.get(position);
         thumbNail.setImageUrl(Endpoint.GET_USER_PHOTO + m.getImgURL(), imageLoader);
         recId.setText(m.getRecid()+" - ");
         name.setText(m.getName());
-        barngay.setText(String.valueOf(m.getBarangay()));
-        city.setText(String.valueOf(m.getCity()));
+//        barngay.setText(String.valueOf(m.getBarangay()));
+//        city.setText(String.valueOf(m.getCity()));
 
 
 

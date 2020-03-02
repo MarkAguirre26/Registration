@@ -65,7 +65,7 @@ public class PersonController {
 //                            params.put("Password", person.getPassword());
                         } else {
                             params.put("edit", "");
-                            params.put("REG_NUMBER", person.getRegId());
+                            params.put("     ", person.getRegId());
                         }
                         params.put("Zone", person.getZone());
                         params.put("Placeofbirth", person.getPlaceofBirth());
@@ -75,14 +75,17 @@ public class PersonController {
                         params.put("Citizenship", person.getCitizenship());
                         params.put("Occupation", person.getOccupation());
                         params.put("Voter", person.getVoter());
-                        params.put("Other", person.getOther());
-                        params.put("Municipality", person.getMunicipality());
-                        params.put("Barangay", person.getBarangay());
+                        params.put("Municipality", "-");
+                        params.put("Barangay", "-");
                         params.put("HouseHoldNo", person.getHousehold());
                         params.put("Lastname", person.getLastName());
                         params.put("Firstname", person.getFirstName());
                         params.put("Middlename", person.getMiddleName());
                         params.put("Street", person.getStreet());
+                        params.put("senior", person.getSenior());
+                        params.put("four_ps", person.getFour_ps());
+                        params.put("sk", person.getSk());
+
                         return params;
                     }
                 };
@@ -105,8 +108,8 @@ public class PersonController {
                 || person.getPlaceofBirth().equals("")
                 || person.getCitizenship().equals("")
                 || person.getOccupation().equals("")
-                || person.getVoter().equals("")
-                || person.getOther().equals("")
+//                || person.getVoter().equals("")
+//                || person.getOther().equals("")
                 || person.getGender().equals("")) {
             return false;
         }
@@ -118,9 +121,9 @@ public class PersonController {
         if (person.getHousehold().equals("")
                 || person.getStreet().equals("")
                 || person.getZone().equals("")
-                || person.getBarangay().equals("")
+//                || person.getBarangay().equals("")
 //                || person.getProvince().equals("")
-                || person.getMunicipality().equals("")) {
+        ) {
             return false;
         }
         return true;

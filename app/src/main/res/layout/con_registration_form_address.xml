@@ -66,17 +66,7 @@
                 android:paddingRight="5dp"
                 android:textSize="20sp" />
 
-            <EditText
-                android:id="@+id/txtBarangay"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_margin="5dp"
-                android:layout_weight=".75"
-                android:background="@drawable/etxt_round"
-                android:hint="Barangay"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:textSize="20sp" />
+
 
 
 
@@ -93,17 +83,7 @@
 <!--                android:textSize="20sp" />-->
 
 
-            <EditText
-                android:id="@+id/txtCity"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_margin="5dp"
-                android:layout_weight=".75"
-                android:background="@drawable/etxt_round"
-                android:hint="City/Municipality"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:textSize="20sp" />
+
 
 
             <Button

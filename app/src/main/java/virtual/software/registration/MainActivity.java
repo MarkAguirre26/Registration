@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
             tvPlaceofbirth,
             tvCitizenship,
             tvCccupation,
-            tvVoter,
+//            tvVoter,
             tvAddress;
 
 
@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
         tvPlaceofbirth = findViewById(R.id.tvPlaceofbirth);
         tvCitizenship = findViewById(R.id.tvCitizenship);
         tvCccupation = findViewById(R.id.tvCccupation);
-        tvVoter = findViewById(R.id.tvVoter);
+//        tvVoter = findViewById(R.id.tvVoter);
         tvAddress = findViewById(R.id.tvAddress);
 
 
@@ -280,8 +280,8 @@ public class MainActivity extends AppCompatActivity {
         tvPlaceofbirth.setText(modelPerson.getPlaceofBirth());
         tvCitizenship.setText(modelPerson.getCitizenship());
         tvCccupation.setText(modelPerson.getOccupation());
-        tvVoter.setText(modelPerson.getVoter());
-        tvAddress.setText(modelPerson.getHousehold() + ", " + modelPerson.getStreet() + ", " + modelPerson.getZone() + ", " + modelPerson.getBarangay() + ", " + modelPerson.getMunicipality());
+//        tvVoter.setText(modelPerson.getVoter());
+        tvAddress.setText(modelPerson.getHousehold() + ", " + modelPerson.getStreet() + ", " + modelPerson.getZone());
 
 
         getUserPhoto();

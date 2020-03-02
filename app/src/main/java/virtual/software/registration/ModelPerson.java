@@ -12,17 +12,51 @@ public class ModelPerson {
     private String Citizenship;
     private String Occupation;
     private String Gender;
-    private String Municipality;
+//    private String Municipality;
 
     private String Household;
     private String Street;
     private String Zone;
-    private String Barangay;
+    //    private String Barangay;
     private String Age;
-//    private String Province;
+    //    private String Province;
     private String Voter;
     private String Other;
+    private String Senior;
+    private String four_ps;
+    private String sk;
 
+    public String getVoter() {
+        return Voter;
+    }
+
+    public void setVoter(String voter) {
+        Voter = voter;
+    }
+
+    public String getSenior() {
+        return Senior;
+    }
+
+    public void setSenior(String senior) {
+        Senior = senior;
+    }
+
+    public String getFour_ps() {
+        return four_ps;
+    }
+
+    public void setFour_ps(String four_ps) {
+        this.four_ps = four_ps;
+    }
+
+    public String getSk() {
+        return sk;
+    }
+
+    public void setSk(String sk) {
+        this.sk = sk;
+    }
 
     public String getAge() {
         return Age;
@@ -40,13 +74,13 @@ public class ModelPerson {
         RegId = regId;
     }
 
-    public String getMunicipality() {
-        return Municipality;
-    }
-
-    public void setMunicipality(String municipality) {
-        Municipality = municipality;
-    }
+//    public String getMunicipality() {
+//        return Municipality;
+//    }
+//
+//    public void setMunicipality(String municipality) {
+//        Municipality = municipality;
+//    }
 
     public String getOther() {
         return Other;
@@ -56,14 +90,6 @@ public class ModelPerson {
         Other = other;
     }
 
-
-    public String getVoter() {
-        return Voter;
-    }
-
-    public void setVoter(String voter) {
-        Voter = voter;
-    }
 
     public String getLastName() {
         return LastName;
@@ -161,13 +187,13 @@ public class ModelPerson {
         Zone = zone;
     }
 
-    public String getBarangay() {
-        return Barangay;
-    }
-
-    public void setBarangay(String barangay) {
-        this.Barangay = barangay;
-    }
+//    public String getBarangay() {
+//        return Barangay;
+//    }
+//
+//    public void setBarangay(String barangay) {
+//        this.Barangay = barangay;
+//    }
 
 
 //    public String getProvince() {

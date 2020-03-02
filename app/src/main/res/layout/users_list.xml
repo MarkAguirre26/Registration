@@ -40,17 +40,17 @@
         </LinearLayout>
 
 
-        <TextView
-            android:id="@+id/barangayList"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="ddd" />
+<!--        <TextView-->
+<!--            android:id="@+id/barangayList"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="ddd" />-->
 
-        <TextView
-            android:id="@+id/cityList"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="ddd" />
+<!--        <TextView-->
+<!--            android:id="@+id/cityList"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="ddd" />-->
 
     </LinearLayout>
 

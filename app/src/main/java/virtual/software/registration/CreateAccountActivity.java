@@ -24,7 +24,7 @@ import static virtual.software.registration.TemporaryData.isSaved;
 
 public class CreateAccountActivity extends AppCompatActivity {
     EditText txtUsername, txtPassword, txtRePassword;
-    RadioButton rbsecretary, rbChairPerson;
+    RadioButton rbsecretary, rbChairPerson, rbKagawad;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +37,7 @@ public class CreateAccountActivity extends AppCompatActivity {
     private void initComponents() {
         rbsecretary = findViewById(R.id.rbsecretary);
         rbChairPerson = findViewById(R.id.rbchairperson);
+        rbKagawad = findViewById(R.id.rbKagawad);
         txtUsername = findViewById(R.id.txtUsernameCreate);
         txtPassword = findViewById(R.id.txtPasswordCreate);
         txtRePassword = findViewById(R.id.txtRePasswordCreate);
@@ -79,8 +80,10 @@ public class CreateAccountActivity extends AppCompatActivity {
                         String position = "";
                         if (rbChairPerson.isChecked()) {
                             position = "ChairPerson";
-                        } else {
+                        } else if (rbsecretary.isChecked()) {
                             position = "Secretary";
+                        } else if (rbKagawad.isChecked()) {
+                            position = "Kagawad";
                         }
                         Map<String, String> params = new HashMap<>();
                         params.put("new_user", "");

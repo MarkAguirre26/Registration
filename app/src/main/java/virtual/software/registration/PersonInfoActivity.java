@@ -3,9 +3,11 @@ package virtual.software.registration;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -25,11 +27,12 @@ public class PersonInfoActivity extends AppCompatActivity {
 
     EditText txtLastName, txtFirstName, txtMiddleName, txtDateofBirth,
             txtPlaceofBirth, txtCitizenship, txtOccupation;
-    RadioButton rbMale, rbFeMale, rbVoterYes, rbVoeterNo;
+    RadioButton rbMale, rbFeMale;
 
     PersonController personController;
-    Spinner spinner, spinnerMaritalStatus;
+    Spinner spinnerMaritalStatus;
     DatePickerDialog picker;
+    CheckBox cbSenior, cbSk, cbFourPs, cbVoter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,11 +65,17 @@ public class PersonInfoActivity extends AppCompatActivity {
         this.setTitle("Personal Information");
 
 
+        cbSenior = findViewById(R.id.cbSenior);
+        cbSk = findViewById(R.id.cbSk);
+        cbFourPs = findViewById(R.id.cbFourPs);
+        cbVoter = findViewById(R.id.cbVoter);
+
+
         // Spinner Drop down elements
-        List<String> categories = new ArrayList<String>();
-        categories.add("Senior");
-        categories.add("4P's");
-        categories.add("SK");
+//        List<String> categories = new ArrayList<String>();
+//        categories.add("Senior");
+//        categories.add("4P's");
+//        categories.add("SK");
 
 //        List<String> categoriesCivilStatus = new ArrayList<String>();
 //        categories.add("Married");
@@ -74,13 +83,13 @@ public class PersonInfoActivity extends AppCompatActivity {
 
 
         // Creating adapter for spinner
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
+//        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
 
         // Creating adapter for spinner
 //        ArrayAdapter<String> dataAdapterCivilStatus = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categoriesCivilStatus);
 
         // Drop down layout style - list view with radio button
-        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 //        dataAdapterCivilStatus.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
 
@@ -93,14 +102,13 @@ public class PersonInfoActivity extends AppCompatActivity {
         txtOccupation = findViewById(R.id.txtOccupation);
         rbMale = findViewById(R.id.rbMale);
         rbFeMale = findViewById(R.id.rbFeMale);
-        rbVoterYes = findViewById(R.id.rbVoterYes);
-        rbVoeterNo = findViewById(R.id.rbVoterNo);
-        spinner = findViewById(R.id.spinner);
+
+//        spinner = findViewById(R.id.spinner);
         spinnerMaritalStatus = findViewById(R.id.spinnerMaritalStatus);
 
 
         // attaching data adapter to spinner
-        spinner.setAdapter(dataAdapter);
+//        spinner.setAdapter(dataAdapter);
 //        spinnerMaritalStatus.setAdapter(dataAdapterCivilStatus);
 
 
@@ -115,7 +123,7 @@ public class PersonInfoActivity extends AppCompatActivity {
             txtCitizenship.setText(modelPerson.getCitizenship());
             txtOccupation.setText(modelPerson.getOccupation());
 
-            spinner.setSelection(dataAdapter.getPosition(modelPerson.getOther()));
+//            spinner.setSelection(dataAdapter.getPosition(modelPerson.getOther()));
 //            spinnerMaritalStatus.setSelection(dataAdapterCivilStatus.getPosition(modelPerson.getCivilStatus()));
             String compareValue = modelPerson.getCivilStatus();
             ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.civil_status, android.R.layout.simple_spinner_item);
@@ -134,12 +142,22 @@ public class PersonInfoActivity extends AppCompatActivity {
                 rbMale.setChecked(true);
             }
 
-            if (modelPerson.getVoter().toLowerCase().equals(String.valueOf(R.string.yes))) {
-                rbVoterYes.setChecked(true);
-                rbVoeterNo.setChecked(false);
-            } else {
-                rbVoterYes.setChecked(false);
-                rbVoeterNo.setChecked(true);
+            cbVoter.setChecked(true);
+            cbFourPs.setChecked(true);
+            cbSenior.setChecked(true);
+            cbSk.setChecked(true);
+
+            if (modelPerson.getVoter().contains("1")) {
+                cbVoter.setChecked(true);
+            }
+            if (modelPerson.getSenior().contains("1")) {
+                cbSenior.setChecked(true);
+            }
+            if (modelPerson.getSk().contains("1")) {
+                cbSk.setChecked(true);
+            }
+            if (modelPerson.getFour_ps().contains("1")) {
+                cbFourPs.setChecked(true);
             }
 
 
@@ -171,6 +189,15 @@ public class PersonInfoActivity extends AppCompatActivity {
     }
 
 
+    private String getBinary(CheckBox cb) {
+        if (cb.isChecked()) {
+            return "1";
+        }
+
+        return "0";
+    }
+
+
     public void next_Clicked(View view) {
 
         view.setAnimation(AnimationUtils.loadAnimation(this, R.anim.bounce));
@@ -190,9 +217,14 @@ public class PersonInfoActivity extends AppCompatActivity {
         modelPerson.setCitizenship(txtCitizenship.getText().toString());
         modelPerson.setOccupation(txtOccupation.getText().toString());
         modelPerson.setGender(getGender(rbMale, rbFeMale));
+        modelPerson.setSenior(getBinary(cbSenior));
+        modelPerson.setVoter(getBinary(cbVoter));
+        modelPerson.setFour_ps(getBinary(cbFourPs));
+        modelPerson.setSk(getBinary(cbSk));
+        Log.d("TesttingDito", modelPerson.getSenior());
 //        modelPerson.setProvince("-");
-        modelPerson.setVoter(getYesNo(rbVoterYes, rbVoeterNo));
-        modelPerson.setOther(spinner.getSelectedItem().toString());
+//        modelPerson.setVoter(getYesNo(rbVoterYes, rbVoeterNo));
+//        modelPerson.setOther(spinner.getSelectedItem().toString());
 
 
         personController = new PersonController(modelPerson, getApplicationContext());

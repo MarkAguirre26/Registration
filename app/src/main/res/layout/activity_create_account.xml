@@ -87,17 +87,31 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <RadioButton
-                        android:id="@+id/rbchairperson"
+                    <RadioGroup
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Chairperson" />
+                        android:layout_height="wrap_content">
 
-                    <RadioButton
-                        android:id="@+id/rbsecretary"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Cecretary" />
+                        <RadioButton
+                            android:id="@+id/rbchairperson"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:text="Chairperson" />
+
+                        <RadioButton
+                            android:layout_margin="5dp"
+                            android:id="@+id/rbsecretary"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Cecretary" />
+
+                        <RadioButton
+                            android:layout_margin="5dp"
+                            android:id="@+id/rbKagawad"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Kagawad" />
+                    </RadioGroup>
                 </LinearLayout>
 
 

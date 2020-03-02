@@ -148,8 +148,8 @@ public class MainListActivity extends AppCompatActivity {
                                 DataModel d = new DataModel();
                                 d.setRecid(obj.getString("id"));
                                 d.setName(obj.getString("RName"));
-                                d.setBarangay(obj.getString("Barangay"));
-                                d.setBarangay(obj.getString("Municipality"));
+//                                d.setBarangay(obj.getString("Barangay"));
+//                                d.setBarangay(obj.getString("Municipality"));
                                 d.setImgURL(obj.getString("imgURL") + ".jpg");
 
 

@@ -95,59 +95,29 @@
                     android:orientation="horizontal"
                     android:padding="10dp">
 
-                    <RadioButton
-                        android:id="@+id/rbMale"
+                    <RadioGroup
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="MALE" />
+                        android:layout_height="wrap_content">
 
-                    <RadioButton
-                        android:id="@+id/rbFeMale"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="FEMALE" />
+                        <RadioButton
+                            android:id="@+id/rbMale"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="MALE" />
 
+                        <RadioButton
+                            android:id="@+id/rbFeMale"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="FEMALE" />
+                    </RadioGroup>
 
                 </LinearLayout>
 
             </LinearLayout>
 
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/voter" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="10dp">
-
-                    <RadioButton
-                        android:id="@+id/rbVoterYes"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="YES" />
-
-                    <RadioButton
-                        android:id="@+id/rbVoterNo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="NO" />
-
-
-                </LinearLayout>
-            </LinearLayout>
 
             <TextView
                 android:layout_width="match_parent"
@@ -212,14 +182,60 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Select:" />
+                android:text="BARANGAY MEMBERSHIP:" />
 
-            <Spinner
-                android:id="@+id/spinner"
-                android:layout_width="fill_parent"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:prompt="@string/spinner_title" />
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+
+                    android:orientation="vertical">
+
+                    <CheckBox
+                        android:id="@+id/cbSenior"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Senior" />
+
+                    <CheckBox
+                        android:id="@+id/cbSk"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Sk" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <CheckBox
+                        android:id="@+id/cbFourPs"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="4P's" />
+
+                    <CheckBox
+                        android:id="@+id/cbVoter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Voter" />
+                </LinearLayout>
+            </LinearLayout>
+
+
+<!--            <Spinner-->
+<!--                android:id="@+id/spinner"-->
+<!--                android:layout_width="fill_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_margin="5dp"-->
+<!--                android:prompt="@string/spinner_title" />-->
 
 
             <Button

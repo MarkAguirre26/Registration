@@ -64,8 +64,8 @@ public class ListAdapter extends BaseAdapter {
 
             holder.iv = (ImageView) convertView.findViewById(R.id.thumbnail);
             holder.tvname = (TextView) convertView.findViewById(R.id.nameList);
-            holder.tvcountry = (TextView) convertView.findViewById(R.id.barangayList);
-            holder.tvcity = (TextView) convertView.findViewById(R.id.cityList);
+//            holder.tvcountry = (TextView) convertView.findViewById(R.id.barangayList);
+//            holder.tvcity = (TextView) convertView.findViewById(R.id.cityList);
 
             convertView.setTag(holder);
         } else {
@@ -76,14 +76,14 @@ public class ListAdapter extends BaseAdapter {
         Picasso.get().load(GET_USER_PHOTO + dataModelArrayList.get(position).getImgURL() + ".jpg").into(holder.iv);
         holder.tvname.setText(dataModelArrayList.get(position).getName());
         holder.tvcountry.setText(dataModelArrayList.get(position).getBarangay());
-        holder.tvcity.setText(dataModelArrayList.get(position).getCity());
+//        holder.tvcity.setText(dataModelArrayList.get(position).getCity());
 
         return convertView;
     }
 
     private class ViewHolder {
 
-        protected TextView tvname, tvcountry, tvcity;
+        protected TextView tvname, tvcountry;
         protected ImageView iv;
     }
 

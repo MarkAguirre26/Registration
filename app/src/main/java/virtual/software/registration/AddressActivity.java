@@ -29,7 +29,7 @@ import static virtual.software.registration.TemporaryData.saveTag;
 
 public class AddressActivity extends AppCompatActivity {
 
-    EditText txtHousehold, txtStreet, txtZone, txBarangay, txtCity;
+    EditText txtHousehold, txtStreet, txtZone;
 
 
     @Override
@@ -87,16 +87,16 @@ public class AddressActivity extends AppCompatActivity {
         txtHousehold = findViewById(R.id.txtHousehold);
         txtStreet = findViewById(R.id.txtStreet);
         txtZone = findViewById(R.id.txtZone);
-        txBarangay = findViewById(R.id.txtBarangay);
-        txtCity = findViewById(R.id.txtCity);
+//        txBarangay = findViewById(R.id.txtBarangay);
+//        txtCity = findViewById(R.id.txtCity);
 
 
         if (saveTag.equals(getResources().getString(R.string.edit))) {
             txtHousehold.setText(modelPerson.getHousehold());
             txtStreet.setText(modelPerson.getStreet());
             txtZone.setText(modelPerson.getZone());
-            txBarangay.setText(modelPerson.getBarangay());
-            txtCity.setText(modelPerson.getMunicipality());
+//            txBarangay.setText(modelPerson.getBarangay());
+//            txtCity.setText(modelPerson.getMunicipality());
 
         }
     }
@@ -123,9 +123,9 @@ public class AddressActivity extends AppCompatActivity {
         modelPerson.setHousehold(txtHousehold.getText().toString());
         modelPerson.setStreet(txtStreet.getText().toString());
         modelPerson.setZone(txtZone.getText().toString());
-        modelPerson.setMunicipality("-");
-        modelPerson.setBarangay(txBarangay.getText().toString());
-        modelPerson.setMunicipality(txtCity.getText().toString());
+//        modelPerson.setMunicipality("-");
+//        modelPerson.setBarangay(txBarangay.getText().toString());
+//        modelPerson.setMunicipality(txtCity.getText().toString());
 //        modelPerson.setRegId(Utils.getDeviceIMEI(this));//Change the  temporary number
         //1. Pass the modelPerson to Controller for validation
 
