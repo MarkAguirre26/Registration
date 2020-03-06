@@ -2,7 +2,10 @@ package virtual.software.registration;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.AnimationUtils;
@@ -12,12 +15,17 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import static virtual.software.registration.TemporaryData.modelPerson;
@@ -25,8 +33,8 @@ import static virtual.software.registration.TemporaryData.saveTag;
 
 public class PersonInfoActivity extends AppCompatActivity {
 
-    EditText txtLastName, txtFirstName, txtMiddleName, txtDateofBirth,
-            txtPlaceofBirth, txtCitizenship, txtOccupation;
+    EditText txtLastName, txtFirstName, txtMiddleName, txtDateofBirth;
+    TextView ageLabel;
     RadioButton rbMale, rbFeMale;
 
     PersonController personController;
@@ -59,11 +67,47 @@ public class PersonInfoActivity extends AppCompatActivity {
                 picker.show();
             }
         });
+
+        txtDateofBirth.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+//                try {
+//                    ageLabel.setText(DobConversion.get(txtDateofBirth.getText().toString()));
+//                } catch (ParseException e) {
+//                    e.printStackTrace();
+//                }
+
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                Date birthDate = null;
+                try {
+                    birthDate = sdf.parse(txtDateofBirth.getText().toString());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                Age age = AgeCalculator.calculateAge(birthDate);
+                System.out.println(age);
+                ageLabel.setText(age.toString());
+
+            }
+        });
     }
 
     private void initComponents() {
         this.setTitle("Personal Information");
 
+        ageLabel = findViewById(R.id.ageLabel);
 
         cbSenior = findViewById(R.id.cbSenior);
         cbSk = findViewById(R.id.cbSk);
@@ -97,9 +141,7 @@ public class PersonInfoActivity extends AppCompatActivity {
         txtFirstName = findViewById(R.id.txtFirstName);
         txtMiddleName = findViewById(R.id.txtMiddleName);
         txtDateofBirth = findViewById(R.id.txtDateofBirth);
-        txtPlaceofBirth = findViewById(R.id.txtPlaceofBirth);
-        txtCitizenship = findViewById(R.id.txtCitizenship);
-        txtOccupation = findViewById(R.id.txtOccupation);
+
         rbMale = findViewById(R.id.rbMale);
         rbFeMale = findViewById(R.id.rbFeMale);
 
@@ -119,9 +161,7 @@ public class PersonInfoActivity extends AppCompatActivity {
             txtFirstName.setText(modelPerson.getFirstName());
             txtMiddleName.setText(modelPerson.getMiddleName());
             txtDateofBirth.setText(modelPerson.getDateofBirth());
-            txtPlaceofBirth.setText(modelPerson.getPlaceofBirth());
-            txtCitizenship.setText(modelPerson.getCitizenship());
-            txtOccupation.setText(modelPerson.getOccupation());
+
 
 //            spinner.setSelection(dataAdapter.getPosition(modelPerson.getOther()));
 //            spinnerMaritalStatus.setSelection(dataAdapterCivilStatus.getPosition(modelPerson.getCivilStatus()));
@@ -213,9 +253,6 @@ public class PersonInfoActivity extends AppCompatActivity {
         modelPerson.setMiddleName(txtMiddleName.getText().toString());
         modelPerson.setCivilStatus(spinnerMaritalStatus.getSelectedItem().toString());
         modelPerson.setDateofBirth(txtDateofBirth.getText().toString());
-        modelPerson.setPlaceofBirth(txtPlaceofBirth.getText().toString());
-        modelPerson.setCitizenship(txtCitizenship.getText().toString());
-        modelPerson.setOccupation(txtOccupation.getText().toString());
         modelPerson.setGender(getGender(rbMale, rbFeMale));
         modelPerson.setSenior(getBinary(cbSenior));
         modelPerson.setVoter(getBinary(cbVoter));

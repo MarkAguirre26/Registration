@@ -96,13 +96,16 @@
                     android:padding="10dp">
 
                     <RadioGroup
+
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
 
                         <RadioButton
                             android:id="@+id/rbMale"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginEnd="20dp"
                             android:layout_weight="1"
                             android:text="MALE" />
 
@@ -110,6 +113,7 @@
                             android:id="@+id/rbFeMale"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
                             android:layout_weight="1"
                             android:text="FEMALE" />
                     </RadioGroup>
@@ -118,66 +122,65 @@
 
             </LinearLayout>
 
-
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/birth_date" />
+                android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/txtDateofBirth"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_margin="5dp"
-                android:layout_weight=".75"
-                android:background="@drawable/etxt_round"
-                android:focusable="false"
-                android:hint="yyyy-dd-mm"
-                android:inputType="none"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-                android:textSize="20sp"
-                tools:ignore="KeyboardInaccessibleWidget" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/birth_date"
+                        android:textAlignment="center" />
 
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Age"
+                        android:textAlignment="center" />
 
-            <EditText
-                android:id="@+id/txtPlaceofBirth"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_margin="5dp"
-                android:layout_weight=".75"
-                android:background="@drawable/etxt_round"
-                android:hint="Place of Birth"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:textSize="20sp" />
+                </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/txtCitizenship"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_margin="5dp"
-                android:layout_weight=".75"
-                android:background="@drawable/etxt_round"
-                android:hint="Citizenship"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:textSize="20sp" />
+                    <EditText
+                        android:id="@+id/txtDateofBirth"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_margin="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/etxt_round"
+                        android:focusable="false"
+                        android:hint="yyyy-dd-mm"
+                        android:inputType="none"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:textSize="20sp"
+                        tools:ignore="KeyboardInaccessibleWidget" />
 
+                    <TextView
+                        android:id="@+id/ageLabel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="1"
+                        android:text="30"
+                        android:textAlignment="center"
+                        android:textSize="25sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
 
-            <EditText
-                android:id="@+id/txtOccupation"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_margin="5dp"
-                android:layout_weight=".75"
-                android:background="@drawable/etxt_round"
-                android:hint="Occupation"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:textSize="20sp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -215,6 +218,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:orientation="vertical">
+
                     <CheckBox
                         android:id="@+id/cbFourPs"
                         android:layout_width="wrap_content"
@@ -230,12 +234,12 @@
             </LinearLayout>
 
 
-<!--            <Spinner-->
-<!--                android:id="@+id/spinner"-->
-<!--                android:layout_width="fill_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_margin="5dp"-->
-<!--                android:prompt="@string/spinner_title" />-->
+            <!--            <Spinner-->
+            <!--                android:id="@+id/spinner"-->
+            <!--                android:layout_width="fill_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_margin="5dp"-->
+            <!--                android:prompt="@string/spinner_title" />-->
 
 
             <Button

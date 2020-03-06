@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50719
 File Encoding         : 65001
 
-Date: 2020-03-02 15:25:07
+Date: 2020-03-06 12:52:56
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -209,12 +209,13 @@ CREATE TABLE `residents` (
   `status` int(100) NOT NULL DEFAULT '0',
   `activate` int(100) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 -- ----------------------------
 -- Records of residents
 -- ----------------------------
 INSERT INTO `residents` VALUES ('6', '201250005', 'Gy', 'Gg', 'Ff', 'Yy', 'Yy Purok Camia', 'Purok Camia', 'Bb', '2/3/2020', '0', 'Male', 'Widowed', 'Gg', 'Gh', '0', '0', '0', '1', '0', '0');
+INSERT INTO `residents` VALUES ('8', null, 'Gg', 'Fg', 'Tt', 'Vg', 'Ggt Purok Dahlia', 'Purok Dahlia', 'Tt', '6/3/2006', '0', 'Male', 'Married', 'Ff', 'Gg', '1', '0', '0', '0', '0', '0');
 
 -- ----------------------------
 -- Table structure for seniorcitizen

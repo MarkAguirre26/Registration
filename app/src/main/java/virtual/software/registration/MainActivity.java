@@ -1,6 +1,7 @@
 package virtual.software.registration;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -81,8 +82,8 @@ public class MainActivity extends AppCompatActivity {
             tvPlaceofbirth,
             tvCitizenship,
             tvCccupation,
-//            tvVoter,
-            tvAddress;
+    //            tvVoter,
+    tvAddress;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -146,6 +147,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
+                startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                 finishAffinity();
             }
         });

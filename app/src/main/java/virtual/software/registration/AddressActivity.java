@@ -29,7 +29,7 @@ import static virtual.software.registration.TemporaryData.saveTag;
 
 public class AddressActivity extends AppCompatActivity {
 
-    EditText txtHousehold, txtStreet, txtZone;
+    EditText txtHousehold, txtStreet, txtZone, txtPlaceofBirth, txtCitizenship, txtOccupation;
 
 
     @Override
@@ -89,12 +89,23 @@ public class AddressActivity extends AppCompatActivity {
         txtZone = findViewById(R.id.txtZone);
 //        txBarangay = findViewById(R.id.txtBarangay);
 //        txtCity = findViewById(R.id.txtCity);
+        txtPlaceofBirth = findViewById(R.id.txtPlaceofBirth);
+        txtCitizenship = findViewById(R.id.txtCitizenship);
+        txtOccupation = findViewById(R.id.txtOccupation);
 
 
         if (saveTag.equals(getResources().getString(R.string.edit))) {
             txtHousehold.setText(modelPerson.getHousehold());
             txtStreet.setText(modelPerson.getStreet());
             txtZone.setText(modelPerson.getZone());
+
+            txtPlaceofBirth.setText(modelPerson.getPlaceofBirth());
+            txtCitizenship.setText(modelPerson.getCitizenship());
+            txtOccupation.setText(modelPerson.getOccupation());
+
+
+
+
 //            txBarangay.setText(modelPerson.getBarangay());
 //            txtCity.setText(modelPerson.getMunicipality());
 
@@ -123,6 +134,13 @@ public class AddressActivity extends AppCompatActivity {
         modelPerson.setHousehold(txtHousehold.getText().toString());
         modelPerson.setStreet(txtStreet.getText().toString());
         modelPerson.setZone(txtZone.getText().toString());
+
+
+
+        modelPerson.setPlaceofBirth(txtPlaceofBirth.getText().toString());
+        modelPerson.setCitizenship(txtCitizenship.getText().toString());
+        modelPerson.setOccupation(txtOccupation.getText().toString());
+
 //        modelPerson.setMunicipality("-");
 //        modelPerson.setBarangay(txBarangay.getText().toString());
 //        modelPerson.setMunicipality(txtCity.getText().toString());

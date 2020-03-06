@@ -16,15 +16,56 @@
             android:orientation="vertical"
             android:padding="30dp">
 
+            <EditText
+                android:id="@+id/txtOccupation"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_margin="5dp"
+                android:layout_weight=".75"
+                android:background="@drawable/etxt_round"
+                android:hint="Occupation"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:textSize="20sp" />
+
+
 
             <TextView
-                android:layout_marginBottom="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
                 android:text="@string/address"
                 android:textColor="@color/colorDarkGrey"
                 android:textSize="18sp"
                 android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/txtPlaceofBirth"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_margin="5dp"
+                android:layout_weight=".75"
+                android:background="@drawable/etxt_round"
+                android:hint="Place of Birth"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:textSize="20sp" />
+
+
+            <EditText
+                android:id="@+id/txtCitizenship"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_margin="5dp"
+                android:layout_weight=".75"
+                android:background="@drawable/etxt_round"
+                android:hint="Citizenship"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:textSize="20sp" />
+
+
+
 
 
             <EditText
@@ -54,36 +95,30 @@
 
 
             <EditText
-                android:focusable="false"
                 android:id="@+id/txtZone"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_margin="5dp"
                 android:layout_weight=".75"
                 android:background="@drawable/etxt_round"
+                android:focusable="false"
                 android:hint="Zone/Purok"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
                 android:textSize="20sp" />
 
 
-
-
-
-<!--            <EditText-->
-<!--                android:id="@+id/txtProvince"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="45dp"-->
-<!--                android:layout_margin="5dp"-->
-<!--                android:layout_weight=".75"-->
-<!--                android:background="@drawable/etxt_round"-->
-<!--                android:hint="Province"-->
-<!--                android:paddingLeft="5dp"-->
-<!--                android:paddingRight="5dp"-->
-<!--                android:textSize="20sp" />-->
-
-
-
+            <!--            <EditText-->
+            <!--                android:id="@+id/txtProvince"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="45dp"-->
+            <!--                android:layout_margin="5dp"-->
+            <!--                android:layout_weight=".75"-->
+            <!--                android:background="@drawable/etxt_round"-->
+            <!--                android:hint="Province"-->
+            <!--                android:paddingLeft="5dp"-->
+            <!--                android:paddingRight="5dp"-->
+            <!--                android:textSize="20sp" />-->
 
 
             <Button

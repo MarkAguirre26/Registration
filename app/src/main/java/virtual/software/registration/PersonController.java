@@ -105,9 +105,6 @@ public class PersonController {
                 || person.getMiddleName().equals("")
                 || person.getCivilStatus().equals("")
                 || person.getDateofBirth().equals("")
-                || person.getPlaceofBirth().equals("")
-                || person.getCitizenship().equals("")
-                || person.getOccupation().equals("")
 //                || person.getVoter().equals("")
 //                || person.getOther().equals("")
                 || person.getGender().equals("")) {
@@ -121,6 +118,9 @@ public class PersonController {
         if (person.getHousehold().equals("")
                 || person.getStreet().equals("")
                 || person.getZone().equals("")
+                || person.getPlaceofBirth().equals("")
+                || person.getCitizenship().equals("")
+                || person.getOccupation().equals("")
 //                || person.getBarangay().equals("")
 //                || person.getProvince().equals("")
         ) {
