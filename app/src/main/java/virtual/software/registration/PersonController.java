@@ -85,6 +85,7 @@ public class PersonController {
                         params.put("senior", person.getSenior());
                         params.put("four_ps", person.getFour_ps());
                         params.put("sk", person.getSk());
+                        params.put("age", person.getAge());
 
                         return params;
                     }

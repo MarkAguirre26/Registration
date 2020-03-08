@@ -258,6 +258,7 @@ public class PersonInfoActivity extends AppCompatActivity {
         modelPerson.setVoter(getBinary(cbVoter));
         modelPerson.setFour_ps(getBinary(cbFourPs));
         modelPerson.setSk(getBinary(cbSk));
+        modelPerson.setAge(ageLabel.getText().toString());
         Log.d("TesttingDito", modelPerson.getSenior());
 //        modelPerson.setProvince("-");
 //        modelPerson.setVoter(getYesNo(rbVoterYes, rbVoeterNo));
